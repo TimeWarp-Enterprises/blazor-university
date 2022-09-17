@@ -10,6 +10,5 @@ internal class Program
     await Bootstrapper
       .Factory
       .CreateDocs(aArgumentArray)
-    //   .AddReadingTimeMeta()
       .RunAsync();
 }

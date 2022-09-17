@@ -7,6 +7,7 @@ date: "2019-07-27"
 
 Previously we've seen how to declare parameters and cascading parameters with specific names. Take, for example, a custom component that wraps an `<img>` element inside some custom HTML.
 
+```razor
 <div class="row">
 	<img src=@src/>
 </div>
@@ -16,9 +17,11 @@ Previously we've seen how to declare parameters and cascading parameters with sp
 	\[Parameter\]
 	public string src { get; set; }
 }
+```
 
 During review it is pointed out that images without an `alt` tag are not very accessible to people with vision impairments, so another parameter is added and the HTML updated.
 
+```razor
 <div class="row" role="img" aria-label=@alt>
   <img src=@src/>
 </div>
@@ -31,6 +34,7 @@ During review it is pointed out that images without an `alt` tag are not very ac
 	\[Parameter\]
 	public string alt { get; set; }
 }
+```
 
 Over time more attributes are required:
 
@@ -46,6 +50,7 @@ Previously we saw how to utilise [Attribute splatting](/components/code-generate
 
 Capturing values of attributes without matching parameters works in a similar way. We simply create a property of type `Dictionary<string, object>`, decorate it as being a `[Parameter]`, but in the Parameter we need to specify `CaptureUnmatchedValues = true`.
 
+```razor
 <div class="row" role="img" aria-label=@alt>
 	<img src=@src @attributes=AllOtherAttributes />
 </div>
@@ -61,6 +66,7 @@ Capturing values of attributes without matching parameters works in a similar wa
 	\[Parameter(CaptureUnmatchedValues = true)\]
 	public Dictionary<string, object> AllOtherAttributes { get; set; }
 }
+```
 
 Now instead of throwing an exception when the consumer of your component adds attribute values you have not explicitly permitted with a `[Parameter]` decorated property (the normal behaviour), Blazor will collect them into the dictionary for us as Key/Value pairs.
 

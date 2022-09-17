@@ -14,67 +14,79 @@ The benefit of reading JavaScript settings from the server's settings is that th
 - Create a new Blazor server-side application
 - Open the **/appsettings.json** file and add a section named "JavaScript"
 
+```json
 {
-	"Logging": {
-		"LogLevel": {
-			"Default": "Information",
-			"Microsoft": "Warning",
-			"Microsoft.Hosting.Lifetime": "Information"
-		}
-	},
-	"JavaScript": {
-		"SomeApiKey":  "123456789"
-	},
-	"AllowedHosts": "\*"
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft": "Warning",
+            "Microsoft.Hosting.Lifetime": "Information"
+        }
+    },
+    "JavaScript": {
+        "SomeApiKey":  "123456789"
+    },
+    "AllowedHosts": "\*"
 }
+```
 
 - Next we need a class to hold this setting, create a folder named **Configuration**
 - Within that folder, create a file named **JavaScriptSettings.cs**
 
+```cs
 public class JavaScriptSettings
 {
-	public string SomeApiKey { get; set; }
+    public string SomeApiKey { get; set; }
 }
+```
 
 - Edit the **/Startup.cs** file
 - In the constructor for the class we'll use the injected `IConfiguration` instance to grab the "JavaScript" section from **/appsettings.json** and store it in a static reference.
 
+```cs
 public Startup(IConfiguration configuration)
 {
-	Configuration = configuration;
-	var javaScriptSettings = configuration
-		.GetSection("JavaScript")
-		.Get<JavaScriptSettings>();
-	JavaScriptConfiguration.SetSettings(javaScriptSettings);
+    Configuration = configuration;
+    var javaScriptSettings = configuration
+        .GetSection("JavaScript")
+        .Get<JavaScriptSettings>();
+    JavaScriptConfiguration.SetSettings(javaScriptSettings);
 }
+```
 
 - The **JavaScriptConfiguration** class doesn't yet exist, so next we'll create that in the **Configuration** folder.
 
+```cs
 public static class JavaScriptConfiguration
 {
-	private static JavaScriptSettings Settings;
+    private static JavaScriptSettings Settings;
 
-	internal static void SetSettings(JavaScriptSettings settings)
-	{
-		Settings = settings;
-	}
+    internal static void SetSettings(JavaScriptSettings settings)
+    {
+        Settings = settings;
+    }
 
-	public static JavaScriptSettings GetSettings() => Settings;
+    public static JavaScriptSettings GetSettings() => Settings;
 }
+```
 
 We now have some new settings in our config file, a class to represent those settings in .NET, and we are reading those values and storing them away in a static reference. Next we need to access it from JavaScript.
 
-- Edit the /Pages/\_Host.cshtml file and beneath the existing `<script>` tag add the following
+- Edit the **/Pages/_Host.cshtml** file and beneath the existing `<script>` tag add the following
 
+```cshtml
 <script src="~/scripts/CallingStaticDotNetMethods.js"></script>
+```
 
 - Next, create a folder named **scripts** under the **/wwwroot** folder
 - Within that folder, create a new file named **CallingDotNetStaticMethods.js** and add the following script
 
+```js
 setTimeout(async function () {
-	const settings = await DotNet.invokeMethodAsync("CallingStaticDotNetMethods", "GetSettings");
-	alert('API key: ' + settings.someApiKey);
+    const settings = await DotNet.invokeMethodAsync("CallingStaticDotNetMethods", "GetSettings");
+    alert('API key: ' + settings.someApiKey);
 }, 1000);
+```
 
 `DotNet.invokeMethodAsync` takes a minimum of two parameters. It is possible to pass more than two, and any parameters after the second are considered values to pass to the method as its parameters.
 
@@ -85,8 +97,10 @@ The final piece of the puzzle is to decorate the method with the `[JSInvokable]`
 
 Edit the **/Configuration/JavaScriptConfiguration** class, and change the GetSettings method:
 
+```cs
 \[JSInvokable("GetSettings")\]
 public static JavaScriptSettings GetSettings() => Settings;
+```
 
 The identifier passed to `[JSInvokable]` does not have to be the same as the method name.
 
@@ -102,48 +116,56 @@ To qualify as a candidate .NET method to be invokable in this way, the method mu
 6. The method must be decorated with `[JSInvokable]`
 7. The same `identifier` used in the `JSInvokable` attribute cannot be used within a single assembly more than once.
 
-**Note: Do not immediately invoke .NET static methods from JavaScript**
+> **_Note:_** Do not immediately invoke .NET static methods from JavaScript**
 
-If you read back to the section on [The JavaScript boot process](/javascript-interop/javascript-boot-process/), you'll remember that JavaScript is initialised in the browser before Blazor has been initialised.
+If you read back to the section on [The JavaScript boot process](/javascript-interop/javascript-boot-process/), you'll remember that JavaScript is initialized in the browser before Blazor has been initialized.
 
 ![](images/JavaScriptBootProcessDiagram.png)
 
 It is for this reason we are only invoking the .NET static method after an initial timeout - in this case I have chosen one second.
 
+```js
 setTimeout(async function () {
-	const settings = await DotNet.invokeMethodAsync("CallingStaticDotNetMethods", "GetSettings");
-	alert('API key: ' + settings.someApiKey);
+    const settings = await DotNet.invokeMethodAsync("CallingStaticDotNetMethods", "GetSettings");
+    alert('API key: ' + settings.someApiKey);
 }, 1000);
+```
 
 At the time of writing there is no way to check from JavaScript whether or not Blazor is ready to be invoked without trying to invoking it and failing.
 
+```js
 window.someInitialization = async function () {
-	try {
-		const settings = await DotNet.invokeMethodAsync("CallingStaticDotNetMethods", "GetSettings");
-		alert('API key: ' + settings.someApiKey);
-	}
-	catch {
-		// Try again
-		this.setTimeout(someInitialization, 10);
-	}
+    try {
+        const settings = await DotNet.invokeMethodAsync("CallingStaticDotNetMethods", "GetSettings");
+        alert('API key: ' + settings.someApiKey);
+    }
+    catch {
+        // Try again
+        this.setTimeout(someInitialization, 10);
+    }
 }
 window.someInitialization();
+```
 
 ## Hooking into Blazor.start
 
-It is possible to have our JavaScript invoked at the point Blazor has been initialised by calling the `Blazor.start` function.
+It is possible to have our JavaScript invoked at the point Blazor has been initialized by calling the `Blazor.start` function.
 
-First, edit /Pages/\_Host.cshtml and change the `<script>` tag that references the Blazor script, and add a new attribute named `autostart` with the value `false`.
+First, edit **/Pages/_Host.cshtml** and change the `<script>` tag that references the Blazor script, and add a new attribute named `autostart` with the value `false`.
 
+```cshtml
 <script src="\_framework/blazor.server.js" autostart="false"></script>
+```
 
 Next we need to change our JavaScript so that it calls `Blazor.start` - which will return a `Promise<void>` we can use to execute our own code once Blazor has been initialized.
 
+```js
 Blazor.start({})
-	.then(async function () {
-		const settings = await DotNet.invokeMethodAsync("CallingStaticDotNetMethods", "GetSettings");
-		alert('API key: ' + settings.someApiKey);
-	});
+    .then(async function () {
+        const settings = await DotNet.invokeMethodAsync("CallingStaticDotNetMethods", "GetSettings");
+        alert('API key: ' + settings.someApiKey);
+    });
+```
 
 The problem with this approach is that you can only use it once. So if we have multiple entry points across different scripts then we'll have to create our own hook point that caches the result from `Blazor.start` and returns it to any calling scripts. I have raised a feature request to provide the ability to register multiple callbacks for when Blazor initialization has completed - [here](https://github.com/aspnet/AspNetCore/issues/17504).
 

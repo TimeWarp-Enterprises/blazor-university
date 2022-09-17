@@ -23,44 +23,46 @@ To call a method on a .NET object instance, we first need to pass a reference to
 
 First, create a new Blazor application and change Index.razor to the following mark-up.
 
-**Warning**: The following code has a memory leak and should not be used in production. This will be highlighted and corrected in [Lifetimes and Memory Leaks](/javascript-interop/calling-dotnet-from-javascript/lifetimes-and-memory-leaks/).
+> **Warning**: The following code has a memory leak and should not be used in production. This will be highlighted and corrected in [Lifetimes and Memory Leaks](/javascript-interop/calling-dotnet-from-javascript/lifetimes-and-memory-leaks/).
 
+```razor
 @page "/"
 @inject IJSRuntime JSRuntime
 
 <h1>Text received</h1>
 <ul>
-	@foreach (string text in TextHistory)
-	{
-		<li>@text</li>
-	}
+    @foreach (string text in TextHistory)
+    {
+        <li>@text</li>
+    }
 </ul>
 
 @code
 {
-	List<string> TextHistory = new List<string>();
+    List<string> TextHistory = new List<string>();
 
-	protected override void OnAfterRender(bool firstRender)
-	{
-		base.OnAfterRender(firstRender);
-		if (firstRender)
-		{
-			// See warning about memory above in the article
-			var dotNetReference = DotNetObjectReference.Create(this);
-			JSRuntime.InvokeVoidAsync("BlazorUniversity.startRandomGenerator", dotNetReference);
-		}
-	}
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        if (firstRender)
+        {
+            // See warning about memory above in the article
+            var dotNetReference = DotNetObjectReference.Create(this);
+            JSRuntime.InvokeVoidAsync("BlazorUniversity.startRandomGenerator", dotNetReference);
+        }
+    }
 
-	\[JSInvokable("AddText")\]
-	public void AddTextToTextHistory(string text)
-	{
-		TextHistory.Add(text.ToString());
-		while (TextHistory.Count > 10)
-			TextHistory.RemoveAt(0);
-		StateHasChanged();
-		System.Diagnostics.Debug.WriteLine("DotNet: Received " + text);
-	}
+    \[JSInvokable("AddText")\]
+    public void AddTextToTextHistory(string text)
+    {
+        TextHistory.Add(text.ToString());
+        while (TextHistory.Count > 10)
+            TextHistory.RemoveAt(0);
+        StateHasChanged();
+        System.Diagnostics.Debug.WriteLine("DotNet: Received " + text);
+    }
 }
+```
 
 - **Line 2**  
     Injects the `IJSRuntime` service. We use this to initialise our JavaScript, passing in a reference to the component that will receive the notifications.
@@ -81,18 +83,22 @@ First, create a new Blazor application and change Index.razor to the following m
 
 First we need to edit either **/Pages/\_Host.cshtml** (server side) or **/wwwroot/index.html** (WASM) and add a reference to a script we are about to create.
 
+```razor
 <script src="/scripts/CallingDotNetFromJavaScript.js"></script>
+```
 
 Next, we'll create the function **BlazorUniversity.startRandomGenerator** and have it call back our .NET object with a random number every second.
 
+```razor
 var BlazorUniversity = BlazorUniversity || {};
 BlazorUniversity.startRandomGenerator = function(dotNetObject) {
-	setInterval(function () {
-		let text = Math.random() \* 1000;
-		console.log("JS: Generated " + text);
-		dotNetObject.invokeMethodAsync('AddText', text.toString());
-	}, 1000);
+    setInterval(function () {
+        let text = Math.random() \* 1000;
+        console.log("JS: Generated " + text);
+        dotNetObject.invokeMethodAsync('AddText', text.toString());
+    }, 1000);
 };
+```
 
 Now run the application and press F12 to view the browser tools window. Look in the console and we should see something like the following:
 

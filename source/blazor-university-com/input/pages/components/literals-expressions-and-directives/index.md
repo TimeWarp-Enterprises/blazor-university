@@ -200,6 +200,6 @@ To avoid accidentally tripping up over inferred literals, my advice is to stick 
 
 Directives are a complex subject. Because this section is about how to differentiate between literals, expressions, and directives, they will not be covered in depth here.
 
-Instead, directives will be covered in the [Directives](/components/directives) section.
+Instead, directives will be covered in the [Directives](directives) section.
 
 \[menu\_navigator\]
