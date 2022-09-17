@@ -1,2 +1,15 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿namespace BlazorUniversityCom;
+using System.Threading.Tasks;
+using Statiq.App;
+using Statiq.Web;
+using Statiq.Docs;
+
+internal class Program
+{
+  public static async Task<int> Main(string[] aArgumentArray) =>
+    await Bootstrapper
+      .Factory
+      .CreateDocs(aArgumentArray)
+    //   .AddReadingTimeMeta()
+      .RunAsync();
+}
