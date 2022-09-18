@@ -9,9 +9,10 @@ During the Blazor boot process, the browser will create the HTML document before
 
 To observe this, create a new Blazor server-side application:
 
-- Edit /App.razor
+- Edit **/App.razor**
 - Add the following `OnInitialized` method.
 
+```razor
 @code {
 	protected override void OnInitialized()
 	{
@@ -19,36 +20,43 @@ To observe this, create a new Blazor server-side application:
 		base.OnInitialized();
 	}
 }
+```
 
 - Create a folder under the **/wwwroot** folder named **scripts**
 - Within that folder create a file named **JavaScriptBootProcess.js**
 - Add the following script
 
+```razor
 const now = new Date();
-console.log('JavaScript initialised: ' + now.getMinutes() + ":" + now.getSeconds() + "." + now.getMilliseconds());
+console.log('JavaScript initialized: ' + now.getMinutes() + ":" + now.getSeconds() + "." + now.getMilliseconds());
+```
 
-- Edit /Pages/\_Host.cshtml
+- Edit **/Pages/_Host.cshtml**
 - Find the text "ServerPrerendered" and change it to "Server"
 - Just below the existing `<script>` tag near the bottom of the page, add the following mark-up
 
+```razor
 <script src="~/scripts/JavaScriptBootProcess.js"></script>
+```
 
 Run the application and look in both the browser's console output and Visual Studio's output window. Comparing the output, we will see something like the following:
 
-JavaScript initialised: 15:20.317
-Blazor initialised: 15:20.466
+```console
+JavaScript initialized: 15:20.317
+Blazor initialized: 15:20.466
+```
 
-Because of this behaviour it is not possible for JavaScript to invoke .NET methods immediately. When using JavaScript interop, I advise initiating the communication from the Blazor side if possible.
+Because of this behavior it is not possible for JavaScript to invoke .NET methods immediately. When using JavaScript interop, I advise initiating the communication from the Blazor side if possible.
 
 ## ServerPrerendering
 
 If we now edit the same project and change the render mode back to `ServerPrerendered` we'll see something like the following:
 
-Blazor initialised: 42:22.559
-JavaScript initialised: 42:22.631
-Blazor initialised: 42:22.690
+Blazor initialized: 42:22.559
+JavaScript initialized: 42:22.631
+Blazor initialized: 42:22.690
 
-The first time the user visits a URL to our app, Blazor will render the App.razor component outside of the browser and send the resulting HTML to the browser. After that, JavaScript is initialised, and then finally Blazor is initialized for the client to interact with.
+The first time the user visits a URL to our app, Blazor will render the App.razor component outside of the browser and send the resulting HTML to the browser. After that, JavaScript is initialized, and then finally Blazor is initialized for the client to interact with.
 
 ![](images/JavaScriptBootProcessDiagram.png)
 
