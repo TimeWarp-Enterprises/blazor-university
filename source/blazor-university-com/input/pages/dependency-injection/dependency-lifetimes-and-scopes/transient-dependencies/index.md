@@ -155,4 +155,3 @@ Registering an injectable dependency as Transient makes our dependency container
 
 Classes implementing `IDisposable` should not be registered as Transient unless using components that own their own Scope, and you know exactly what you are doing (you've read the Scoped dependencies section).
 
-\[menu\_navigator\]

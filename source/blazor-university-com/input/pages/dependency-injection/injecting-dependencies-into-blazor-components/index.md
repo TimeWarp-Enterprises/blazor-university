@@ -191,4 +191,3 @@ To consume our `IToDoApi` service, we'll simply inject it into our `Index` page 
 
 ![](images/ToDoListRendered.png)
 
-\[menu\_navigator\]

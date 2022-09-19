@@ -210,4 +210,3 @@ public Task SomethingHappenedInChildComponent()
   return SomeTask;
 }
 
-\[menu\_navigator\]

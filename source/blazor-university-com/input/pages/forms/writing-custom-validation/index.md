@@ -335,4 +335,3 @@ WASM: Hooked up EditContext events (OnValidationRequested and OnFieldChanged)
     The `Person` instance in Index.razor is changed, resulting in the meta-state instances being discarded and new ones created for the new `EditForm.Model`.  
     
 
-\[menu\_navigator\]

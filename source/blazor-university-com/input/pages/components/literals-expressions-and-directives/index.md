@@ -202,4 +202,3 @@ Directives are a complex subject. Because this section is about how to different
 
 Instead, directives will be covered in the [Directives](directives) section.
 
-\[menu\_navigator\]

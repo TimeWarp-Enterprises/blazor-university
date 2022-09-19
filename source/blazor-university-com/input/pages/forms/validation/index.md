@@ -106,4 +106,3 @@ Both forms are equivalent. The quoted form is easier to read, whereas the razor 
 
 [![](images/ValidationSummaryAndValidationMessages.png)](http://blazor-university.com/wp-content/uploads/2019/08/ValidationSummaryAndValidationMessages.png)
 
-\[menu\_navigator\]

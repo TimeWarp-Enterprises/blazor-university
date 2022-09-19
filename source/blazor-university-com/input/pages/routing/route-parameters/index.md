@@ -53,4 +53,3 @@ Note that when a navigation is made to a new URL that resolves to the same type 
 the component will not be destroyed before navigation and the `OnInitialized*` lifecycle methods will not be executed.
 The navigation is simply seen as a change to the component's parameters.
 
-\[menu\_navigator\]

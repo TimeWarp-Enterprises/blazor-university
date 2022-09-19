@@ -89,4 +89,3 @@ In the preceding example we only need to explicitly specify `<ChildContent>` bec
 
 See [Passing data to RenderFragments](/templating-components-with-renderfragements/passing-data-to-a-renderfragement/) for more information.
 
-\[menu\_navigator\]

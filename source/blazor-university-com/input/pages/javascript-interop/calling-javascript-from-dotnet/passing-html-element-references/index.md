@@ -239,4 +239,3 @@ Enter your name
 
 > **_Note_:** There are plans for a future Blazor to automatically create the `ElementReference` member.
 
-\[menu\_navigator\]

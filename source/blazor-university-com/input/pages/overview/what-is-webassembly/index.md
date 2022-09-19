@@ -19,4 +19,3 @@ Supported browsers
 
 Data from CanIUse.com ([https://caniuse.com/#search=wasm](https://caniuse.com/#search=wasm))
 
-\[menu\_navigator\]

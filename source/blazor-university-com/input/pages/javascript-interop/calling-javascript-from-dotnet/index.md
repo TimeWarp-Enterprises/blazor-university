@@ -126,4 +126,3 @@ So far we've only used the `IJSRuntime` extension method `InvokeVoidAsync`. If w
 	}
 }
 
-\[menu\_navigator\]

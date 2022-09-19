@@ -11,4 +11,3 @@ date: "2019-11-15"
 
 Welcome to Blazor University. By working your way through the information in this website I intend to take you from complete novice through to expert in all things Blazor.
 
-\[menu\_navigator\]

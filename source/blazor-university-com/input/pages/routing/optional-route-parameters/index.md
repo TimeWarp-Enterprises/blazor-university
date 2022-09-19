@@ -146,4 +146,3 @@ public async override Task SetParametersAsync(ParameterView parameters)
 
 ![](images/OptionalRouteParametersWithDefaultValues.gif)
 
-\[menu\_navigator\]

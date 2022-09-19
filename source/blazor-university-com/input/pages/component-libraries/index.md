@@ -45,4 +45,3 @@ In a client-side Blazor application this typically involves adding a `<script>` 
 
 For a server-side Blazor app it is added into the file **/Pages/\_Host.cshtml** and is usually added before the existing `<script>` tag referencing either `_framework/blazor.server.js` or `_framework/blazor.webassembly.js`
 
-\[menu\_navigator\]

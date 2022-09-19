@@ -116,4 +116,3 @@ The `@attributes=` directive will always insert additional values from the consu
 
 ![](images/RIP.jpg)
 
-\[menu\_navigator\]

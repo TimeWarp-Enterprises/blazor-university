@@ -142,4 +142,3 @@ Because `razor` files transpile to `C#` classes, we do not need to specify the t
 
 <SomeGenericComponent TParam1=Person TParam2=Supplier TItem=etc/>
 
-\[menu\_navigator\]

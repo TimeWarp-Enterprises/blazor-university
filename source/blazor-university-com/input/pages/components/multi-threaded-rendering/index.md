@@ -147,4 +147,3 @@ In a Blazor WebAssembly application (which only has a single thread) there are n
 
 This issue will be addressed in the section on [OwningComponentBase<T>](https://blazor-university.com/dependency-injection/component-scoped-dependencies/owningcomponentbase-generic/).
 
-\[menu\_navigator\]

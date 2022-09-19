@@ -60,4 +60,3 @@ The first time the user visits a URL to our app, Blazor will render the App.razo
 
 ![](images/JavaScriptBootProcessDiagram.png)
 
-\[menu\_navigator\]

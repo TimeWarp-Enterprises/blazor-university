@@ -128,4 +128,3 @@ It's not currently possible to constrain a parameter to match a value of an enum
 - **Custom constraints**  
 It is not possible to define a custom class that determines whether or not a value passed to a parameter is valid.
 
-\[menu\_navigator\]

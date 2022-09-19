@@ -7,4 +7,3 @@ So far we've learned about the three dependency injection scopes: Singleton, Sco
 
 In some cases we might need more control over the lifetimes of our injected dependencies, and to control whether they are shared across components or for use by a single component only. The following sections will cover a number of scenarios and how they might be implemented; some of which are built into Blazor already, and some custom made based on what we learn along the way.
 
-\[menu\_navigator\]

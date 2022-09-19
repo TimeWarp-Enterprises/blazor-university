@@ -9,4 +9,3 @@ When installing, ensure you select the option **ASP.NET and web development** un
 
 ![](images/InstallAspWorkload.jpg)
 
-\[menu\_navigator\]

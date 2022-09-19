@@ -99,4 +99,3 @@ Differential tree
 
 The differential render tree is then used to update the actual HTML DOM in the browser.
 
-\[menu\_navigator\]

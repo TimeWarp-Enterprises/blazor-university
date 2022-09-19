@@ -13,4 +13,3 @@ date: "2019-04-27"
 - Check the **ASP.NET Core hosted** check box.
 - Click **Create**.
 
-\[menu\_navigator\]

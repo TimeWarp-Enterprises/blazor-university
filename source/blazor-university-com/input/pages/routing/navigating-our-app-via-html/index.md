@@ -177,4 +177,3 @@ With either the Counter/1 or Counter/2 link selected, toggle the value of the `<
 Despite the browser URL remaining unaltered, we can see the first Counter NavLink toggling between being
 active/not-active based on the setting of its `Match` parameter.
 
-\[menu\_navigator\]

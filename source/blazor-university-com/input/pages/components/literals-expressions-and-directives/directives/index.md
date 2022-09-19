@@ -141,4 +141,3 @@ Lines 4, 6, and 8 all define the `@onclick` attribute and declare which C# metho
 
 Some directive attributes expect us to specify a value in the form `@directive:attribute="value"`. We'll cover this in detail in the section on [Two-way binding](/components/two-way-binding/).
 
-\[menu\_navigator\]

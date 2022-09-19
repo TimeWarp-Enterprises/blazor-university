@@ -202,4 +202,3 @@ protected override async Task OnParametersSetAsync()
 
 For more information about how to work safely with different threads running on the same component, see the section on [Multi-threaded rendering](https://blazor-university.com/components/multi-threaded-rendering/).
 
-\[menu\_navigator\]

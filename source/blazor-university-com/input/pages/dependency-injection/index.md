@@ -61,4 +61,3 @@ public void WhenSigningUp\_ThenSendsAnEmail()
       Times.Once);
 }
 
-\[menu\_navigator\]

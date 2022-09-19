@@ -311,4 +311,3 @@ In the preceding illustration, at step 2 the `ApplicationDbContext` has been ins
 
 So, although shared state is safe in synchronous code when executed via `InvokeAsync`, keep in mind that as soon as your code introduces an `await` it allows other threads the opportunity to step in until the `await` is complete.
 
-\[menu\_navigator\]

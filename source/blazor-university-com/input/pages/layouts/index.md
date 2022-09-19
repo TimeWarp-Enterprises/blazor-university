@@ -37,4 +37,3 @@ The resulting HTML would look like this
   This is the end of the layout
 </footer>
 
-\[menu\_navigator\]

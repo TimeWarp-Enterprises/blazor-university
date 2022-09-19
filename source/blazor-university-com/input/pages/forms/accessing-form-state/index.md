@@ -70,4 +70,3 @@ This CSS tells the browser that our `<input>` HTML element with an **invalid** c
 
 Input with only the outer element outlined
 
-\[menu\_navigator\]

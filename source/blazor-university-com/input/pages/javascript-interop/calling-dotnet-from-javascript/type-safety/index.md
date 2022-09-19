@@ -49,4 +49,3 @@ Now the calling JavaScript can pass the name of the enum value **or** its numeri
 dotNetObject.invokeMethodAsync('OurInvokableDotNetMethod', 'FirstValue');
 dotNetObject.invokeMethodAsync('OurInvokableDotNetMethod', 200);
 
-\[menu\_navigator\]

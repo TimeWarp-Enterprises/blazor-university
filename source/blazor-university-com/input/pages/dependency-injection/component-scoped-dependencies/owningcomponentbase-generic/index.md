@@ -143,4 +143,3 @@ Run the application again and navigate to the **/owned-fetchdata** page. Because
 
 If our server-side application were accessing a database, we might descend our component from `OwningComponentBase<MyDbContext>` and fetch data from the database into an array for rendering.
 
-\[menu\_navigator\]

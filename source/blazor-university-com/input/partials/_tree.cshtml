@@ -70,12 +70,12 @@
     {
       var menugroupClasses = GetMenuGroupClasses();
       <div class="@GetMenuGroupClasses()" data-group-id=@(Model.Id)>
-        @{TraverseChildren();}
+        @{await TraverseChildren();}
       </div>
     }
     else
     {
-      TraverseChildren();
+      await TraverseChildren();
     }
   }
 }

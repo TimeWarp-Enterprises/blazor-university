@@ -116,4 +116,3 @@ In January 2020, Microsoft announced Blazor Mobile Bindings, an experimental pro
 
 You can find the official announcement [here](https://devblogs.microsoft.com/aspnet/mobile-blazor-bindings-experiment/).
 
-\[menu\_navigator\]

@@ -243,4 +243,3 @@ To improve the user experience, our component should really scroll the `<textare
 2. You'll need to [invoke this JavaScript](https://blazor-university.com/javascript-interop/calling-javascript-from-dotnet/) after every time our component [renders](https://blazor-university.com/components/component-lifecycles/).
 3. You'll need an [ElementReference](https://blazor-university.com/javascript-interop/calling-javascript-from-dotnet/passing-html-element-references/) to the `<textarea>` to pass to the JavaScript.
 
-\[menu\_navigator\]

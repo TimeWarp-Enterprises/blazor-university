@@ -91,4 +91,3 @@ else
 
 Obviously, this example excludes how to translate the static text based on the `UserPreferences.LanguageCode`.
 
-\[menu\_navigator\]

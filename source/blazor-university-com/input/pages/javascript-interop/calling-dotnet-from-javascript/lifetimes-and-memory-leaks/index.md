@@ -167,4 +167,3 @@ Finally, we need our component to keep track of the handle of the JavaScript int
 
 The interval is cancelled before our `DotNetObjectReference` is disposed so our JavaScript doesn't try to invoke a method on a .NET object using an invalid object reference. As per good practice, we check the **GeneratorHandle** member has been set before trying to clear it, just in case the component is being disposed of before the `OnAfterRender*` methods have been executed.
 
-\[menu\_navigator\]

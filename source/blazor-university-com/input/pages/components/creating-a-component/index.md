@@ -32,4 +32,3 @@ Now run the app and we'll see the following.
 
 ![](images/ThisIsMyFirstComponent.jpg)
 
-\[menu\_navigator\]

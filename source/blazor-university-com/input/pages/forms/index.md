@@ -65,4 +65,3 @@ When the user clicks the **Submit** button in the preceding example, the `EditFo
 
 Form submission will be covered in more depth in the [Handling form submission](/forms/handling-form-submission/) section.
 
-\[menu\_navigator\]

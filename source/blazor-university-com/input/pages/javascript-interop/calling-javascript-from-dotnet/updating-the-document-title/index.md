@@ -82,4 +82,3 @@ As explained in the section on [The JavaScript boot process](/javascript-interop
 
 Edit each of the pages in the /Pages folder, and add our new element `<Document Title="Index"/>` - but obviously with the correct text you would like displayed in the browser's tabs.
 
-\[menu\_navigator\]

@@ -106,4 +106,3 @@ When using the `@inject` directive, Blazor will inject Scoped dependencies from 
 
 The correct way for a component to own multiple dependencies will be covered in the section about the non-generic [OwningComponentBase](https://blazor-university.com/dependency-injection/component-scoped-dependencies/owning-multiple-dependencies-the-right-way/) class.
 
-\[menu\_navigator\]

@@ -60,4 +60,3 @@ If we run our application again and navigate to the Counter page, we'll see that
 
 Before continuing to learn how two-way binding works, we first need to learn about Component Events, and Directives.
 
-\[menu\_navigator\]

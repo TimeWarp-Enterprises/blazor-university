@@ -109,4 +109,3 @@ The behaviour we actually want would result in a user-experience that looks like
 
 ![](images/BlazorFormValidationCorrect.png)
 
-\[menu\_navigator\]

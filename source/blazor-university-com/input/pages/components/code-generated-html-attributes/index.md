@@ -82,4 +82,3 @@ In razor views the rule is slightly different. If we output `readonly=@IsReadOnl
 
 `<input readonly=@true disabled=@false/>` will result in razor generated HTML that does not include the `disabled`attribute at all.
 
-\[menu\_navigator\]

@@ -136,4 +136,3 @@ As with the **format** directive attribute, the `@bind-value:culture` specified 
 
 If you have not heard of **The Turkey test**, then I recommend reading [this excellent article](http://www.moserware.com/2008/02/does-your-code-pass-turkey-test.html).
 
-\[menu\_navigator\]

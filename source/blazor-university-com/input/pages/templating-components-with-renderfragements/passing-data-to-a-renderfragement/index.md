@@ -159,4 +159,3 @@ For example, the `TabTextTemplate` mark-up demonstrated earlier could instead be
 </TabTextTemplate>
 ```
 
-\[menu\_navigator\]

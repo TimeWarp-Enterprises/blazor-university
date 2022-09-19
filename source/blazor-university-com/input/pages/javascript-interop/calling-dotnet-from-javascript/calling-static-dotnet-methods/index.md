@@ -169,4 +169,3 @@ Blazor.start({})
 
 The problem with this approach is that you can only use it once. So if we have multiple entry points across different scripts then we'll have to create our own hook point that caches the result from `Blazor.start` and returns it to any calling scripts. I have raised a feature request to provide the ability to register multiple callbacks for when Blazor initialization has completed - [here](https://github.com/aspnet/AspNetCore/issues/17504).
 
-\[menu\_navigator\]

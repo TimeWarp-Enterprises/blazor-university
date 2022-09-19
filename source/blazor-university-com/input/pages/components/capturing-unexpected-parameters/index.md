@@ -76,4 +76,3 @@ In the preceding example, any `attributes=value` assignments specified by the co
 
 ![](images/CaptureUnmatchedValues.gif)
 
-\[menu\_navigator\]

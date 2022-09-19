@@ -33,4 +33,3 @@ Scopes in WebAssembly applications are slightly different. In a server-side appl
 
 ![](images/BlazorWebAssemblyScopes.jpg)
 
-\[menu\_navigator\]

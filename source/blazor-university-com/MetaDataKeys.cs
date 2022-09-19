@@ -5,6 +5,8 @@ public class MetaDataKeys
   public const string SiteTitle = nameof(SiteTitle);
   // public const string ImageUrl = nameof(ImageUrl);
   public const string ShowInSidebar = nameof(ShowInSidebar);
+  public const string EditRoot = nameof(EditRoot);
+  public const string EditLink = nameof(EditLink);
 
   // /// <summary>
   // /// A glob pattern configured in settings.yml

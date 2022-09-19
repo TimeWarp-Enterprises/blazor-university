@@ -128,4 +128,3 @@ At the moment the `TabControl` will show all `TabPages`. To fix this, simply cha
 	@ChildContent
 }
 
-\[menu\_navigator\]

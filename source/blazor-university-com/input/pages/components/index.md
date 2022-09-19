@@ -53,4 +53,3 @@ Welcome to your new app.
 
 When embedding a page within another page, Blazor treats it as a component. The `LayoutAttribute` on the embedded page is ignored because Blazor already has an explicit container - the parent component that contains it.
 
-\[menu\_navigator\]

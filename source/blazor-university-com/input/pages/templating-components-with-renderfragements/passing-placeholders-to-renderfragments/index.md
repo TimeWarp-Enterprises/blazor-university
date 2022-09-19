@@ -423,4 +423,3 @@ Hopefully, this section has helped you to understand when to use this technique,
 
 The source code for this section includes an additional [sample page](https://github.com/mrpmorris/blazor-university/blob/master/src/TemplatedComponents/PassingPlaceholdersToRenderFragments/Pages/Paged.razor) that consumes a [PagedDataList](https://github.com/mrpmorris/blazor-university/blob/master/src/TemplatedComponents/PassingPlaceholdersToRenderFragments/Shared/PagedDataList.razor) component.
 
-\[menu\_navigator\]

@@ -41,4 +41,3 @@ Illustration of a parameter being required solely to pass data on to children
 
 This is the challenge that Cascading values solve.
 
-\[menu\_navigator\]

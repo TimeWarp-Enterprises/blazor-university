@@ -27,4 +27,3 @@ According to the .NET foundation, at the time of writing it is supported by 3,70
 
 ![](images/NetFoundationStats.png)
 
-\[menu\_navigator\]

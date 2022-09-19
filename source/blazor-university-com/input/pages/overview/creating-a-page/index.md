@@ -59,4 +59,3 @@ Now run the application again, navigate to the **Counter** page, and click the b
 
 ![](images/CounterInteraction.gif)
 
-\[menu\_navigator\]

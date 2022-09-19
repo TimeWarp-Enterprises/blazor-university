@@ -24,4 +24,3 @@ in future sections.
 - [Avoid invoking methods on disposed .NET references](/javascript-interop/calling-dotnet-from-javascript/lifetimes-and-memory-leaks/#caveat).
 - [Do not invoke .NET methods before Blazor has initialized](/javascript-interop/calling-javascript-from-dotnet/passing-html-element-references/).
 
-\[menu\_navigator\]

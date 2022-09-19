@@ -25,4 +25,3 @@ The `Router` component has a [RenderFragment parameter](/templating-components-w
 
 ![](images/image-1.png)
 
-\[menu\_navigator\]

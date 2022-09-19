@@ -182,4 +182,3 @@ void AlterBy(int adjustment)
 }
 ```
 
-\[menu\_navigator\]

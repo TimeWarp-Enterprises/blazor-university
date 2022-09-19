@@ -88,4 +88,3 @@ The `InputSelect` component binds a property of any kind to an HTML `<select>` e
 
 As the razor view defaults `FormData.SomeSelectProperty`to `SomeStateEnum.Active`, the `<select>` HTML element will default its selection to that value, even though it is not the first `<option>` specified.
 
-\[menu\_navigator\]

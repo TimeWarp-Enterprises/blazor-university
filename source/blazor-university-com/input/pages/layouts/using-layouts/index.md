@@ -68,4 +68,3 @@ So far we've seen that a default layout can be specified in the **/Pages/\_Impor
 
 Running the app again and clicking on the **Admin users** link will now show basic page using the app's standard layout.
 
-\[menu\_navigator\]

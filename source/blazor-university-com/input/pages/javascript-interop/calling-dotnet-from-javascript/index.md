@@ -110,4 +110,3 @@ Browser view
 
 Visual Studio output view
 
-\[menu\_navigator\]

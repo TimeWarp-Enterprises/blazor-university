@@ -110,4 +110,3 @@ builder.CloseComponent();
 - **Line 5** performs the one-way binding from `Counter.currentCount` into `MyFirstComponent.CurrentCounterValue`.
 - **Line 15** updates `Counter.currentCount` whenever `MyFirstComponent.CurrentCounterValueChanged` is executed.
 
-\[menu\_navigator\]

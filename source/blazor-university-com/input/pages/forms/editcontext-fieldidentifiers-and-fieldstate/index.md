@@ -90,4 +90,3 @@ We'd expect to see field identifiers like the following:
 
 **Note**: An entry is only added to the dictionary when needed.
 
-\[menu\_navigator\]

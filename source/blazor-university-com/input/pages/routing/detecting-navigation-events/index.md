@@ -56,4 +56,3 @@ void IDisposable.Dispose()
 	NavigationManager.LocationChanged -= LocationChanged;
 }
 
-\[menu\_navigator\]

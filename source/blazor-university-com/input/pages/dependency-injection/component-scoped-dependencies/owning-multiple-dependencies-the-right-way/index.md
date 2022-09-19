@@ -184,4 +184,3 @@ Descend from `OwningComponentBase<T>` when you need only a single dependency to 
 
 Although the process of resolving instances of your component's dependencies is a manual process, there is no need to dispose of any dependencies created as the component's dependency container will dispose of them when `OwningComponentBase.Dispose` is executed.
 
-\[menu\_navigator\]

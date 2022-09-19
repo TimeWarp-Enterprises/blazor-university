@@ -358,4 +358,3 @@ Transient dependencies work the same on both server-side and WebAssembly, and th
 
 There are ways of introducing additional scopes for each user. This technique will be covered in a later section.
 
-\[menu\_navigator\]

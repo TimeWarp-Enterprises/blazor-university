@@ -27,4 +27,3 @@ Note that this is not the entire HTML page. Blazor layouts work only within the 
 
 [![](images/Layout.png)](http://blazor-university.com/wp-content/uploads/2019/06/image.png)
 
-\[menu\_navigator\]

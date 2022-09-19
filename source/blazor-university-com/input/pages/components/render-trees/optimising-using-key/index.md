@@ -171,4 +171,3 @@ Clearly it is advantageous to use the **@key** directive any time you render ite
 
 The value used for `@key` can be any type of object. We can use the `Person` instance itself or, if the instances in the list change, then we can use something like `Person.ID` instead.
 
-\[menu\_navigator\]

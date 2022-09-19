@@ -54,4 +54,3 @@ This means a single component may be decorated with zero, one, or many `RouteAtt
 
 Pages may also be defined in [Component libraries](/component-libraries).
 
-\[menu\_navigator\]

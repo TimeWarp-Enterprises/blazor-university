@@ -37,4 +37,3 @@ In order to ensure the **AdminUsers** page uses the **AdminLayout**, ensure ther
 
 ![](images/CascadingLayouts.png)
 
-\[menu\_navigator\]

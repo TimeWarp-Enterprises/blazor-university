@@ -184,4 +184,3 @@ Favorite colour is @CurrentPerson.FavoriteColor
 
 ![](images/InputColor-Edge.gif)
 
-\[menu\_navigator\]

@@ -63,4 +63,3 @@ Note also how the value of `CascadedValue` is available to all of the components
 
 ![](images/OverridingCascadedValues-1024x636.png)
 
-\[menu\_navigator\]
