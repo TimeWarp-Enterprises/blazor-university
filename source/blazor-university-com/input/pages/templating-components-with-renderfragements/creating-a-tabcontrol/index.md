@@ -23,7 +23,7 @@ The first step is to create two components. One named `TabControl` and the other
 
 @code {
 	// Next line is needed so we are able to add <TabPage> components inside
-	\[Parameter\]
+	[Parameter]
 	public RenderFragment ChildContent { get; set; }
 }
 
@@ -34,7 +34,7 @@ The first step is to create two components. One named `TabControl` and the other
 	\[CascadingParameter\]
 	private TabControl Parent { get; set; }
 
-	\[Parameter\]
+	[Parameter]
 	public RenderFragment ChildContent { get; set; }
 
 	protected override void OnInitialized()
@@ -68,7 +68,7 @@ internal void AddPage(TabPage tabPage)
 
 Add a Text parameter to the `TabPage` component, so its parent `TabControl` knows what text to show inside the button that activates each page.
 
-\[Parameter\]
+[Parameter]
 public string Text { get; set; }
 
 And then add the following mark-up to `TabControl` (just above where the `ChildContent` is rendered) which will both render the tabs, and change which `TabPage` is selected when it's tab is clicked.

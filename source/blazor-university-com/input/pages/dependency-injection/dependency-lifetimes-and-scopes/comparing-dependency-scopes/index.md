@@ -110,7 +110,7 @@ First we need to inject our services, then we'll display the `InstanceNumber` fo
 
 @code
 {
-	\[Parameter\]
+	[Parameter]
 	public string Caption { get; set; }
 
 	private string GetNewIndicatorCss(TimeSpan time)
@@ -190,7 +190,7 @@ To force a page refresh we'll use the `NavigationManager` to navigate, and pass 
 
 @code
 {
-	\[Parameter\]
+	[Parameter]
 	public string Continue { get; set; }
 
 	private void GoToNextStep()
@@ -267,7 +267,7 @@ else
 
 @code
 {
-	\[Parameter\]
+	[Parameter]
 	public string Continue { get; set; }
 
 	private int CurrentStep = 1;

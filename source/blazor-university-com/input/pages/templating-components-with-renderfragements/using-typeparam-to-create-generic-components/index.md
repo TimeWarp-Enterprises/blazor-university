@@ -17,7 +17,7 @@ First, we need to create a **DataList.razor** file in the **/Shared** folder and
 
 @code
 {
-  \[Parameter\]
+  [Parameter]
   public IEnumerable<TItem> Data { get; set; }
 }
 
@@ -65,10 +65,10 @@ The final `DataList.razor` component mark-up will look like this.
 </ul>
 @code
 {
-  \[Parameter\]
+  [Parameter]
   public IEnumerable<TItem> Data { get; set; }
 
-  \[Parameter\]
+  [Parameter]
   public RenderFragment<TItem> ChildContent { get; set; }
 }
 
@@ -120,10 +120,10 @@ Note: Line 5 has been added to specify the `ChildContext` that we wish to be ren
 </ul>
 @code
 {
-  \[Parameter\]
+  [Parameter]
   public IEnumerable<TItem> Data { get; set; }
 
-  \[Parameter\]
+  [Parameter]
   public RenderFragment<TItem> ChildContent { get; set; }
 }
 

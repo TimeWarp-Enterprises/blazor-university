@@ -20,7 +20,7 @@ Start as we did with the **Counter** page, by adding a button with an `onclick` 
 <button @onclick=UpdateCurrentCounterValue>Update</button>
 
 @code {
-    \[Parameter\]
+    [Parameter]
     public int CurrentCounterValue { get; set; }
 
     void UpdateCurrentCounterValue()
@@ -64,10 +64,10 @@ To implement this in **MyFirstComponent**
 <button @onclick=@UpdateCurrentCounterValue>Update</button>
 
 @code {
-    \[Parameter\]
+    [Parameter]
     public int CurrentCounterValue { get; set; }
 
-    \[Parameter\]
+    [Parameter]
     public EventCallback<int> CurrentCounterValueChanged { get; set; }
 
     async Task UpdateCurrentCounterValue()

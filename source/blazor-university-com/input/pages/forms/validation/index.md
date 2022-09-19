@@ -69,7 +69,7 @@ The `ValidationSummary` component can simply be dropped into an `EditForm` in ou
 
 As the `ValidationMessage` component displays error messages for a single field, it requires us to specify the identity of the field. To ensure our parameter's value stays correct after refactoring (for example, when we refactor property names on our `Person` class) Blazor requires us to specify an `Expression` when identifying the field. The parameter, named `For`, is defined on the `ValidationMessage` as follows:
 
-\[Parameter\]
+[Parameter]
 public Expression<Func<T>> For { get; set; }
 
 This means to specify the identity of the field we should use a lambda expression, which can be presented either "quoted", or wrapped in `@(...)`

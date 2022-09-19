@@ -27,7 +27,7 @@ public class FluentValidationValidator : ComponentBase
     \[CascadingParameter\]
     private EditContext EditContext { get; set; }
 
-    \[Parameter\]
+    [Parameter]
     public Type ValidatorType { get; set; }
 
     private IValidator Validator;

@@ -39,7 +39,7 @@ We'll also need to change the `currentCount` field so it is a property with a ge
 Note that it has been renamed from _camelCase_ to _PascalCase_ too.
 
 ```razor
-\[Parameter\]
+[Parameter]
 public int CurrentCount { get; set; }
 ```
 
@@ -50,7 +50,7 @@ The `NavigationManager` was injected into our `CounterBase` class, and so is acc
 
 ```razor
 @code {
-  \[Parameter\]
+  [Parameter]
   public int CurrentCount { get; set; }
 
   bool forceLoad;
@@ -92,7 +92,7 @@ The whole file should eventually look like this:
 </p>
 
 @code {
-  \[Parameter\]
+  [Parameter]
   public int CurrentCount { get; set; }
 
   bool forceLoad;

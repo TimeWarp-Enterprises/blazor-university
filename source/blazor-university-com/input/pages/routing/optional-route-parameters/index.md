@@ -35,7 +35,7 @@ Also add a few navigations on the page so we can quickly test our routes
 </ul>
 
 @code {
-  \[Parameter\]
+  [Parameter]
   public int CurrentCount { get; set; }
 
   void IncrementCount()
@@ -58,7 +58,7 @@ Firstly, we'll need to change the type of our parameter property to be nullable,
 `/counter/0` and just `/counter` - and then assign the default value to the property if it is `null`.
 
 ```razor
-\[Parameter\]
+[Parameter]
 public int? CurrentCount { get; set; }
 
 protected override void OnInitialized()

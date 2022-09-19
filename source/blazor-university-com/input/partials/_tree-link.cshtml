@@ -1,0 +1,13 @@
+<!-- _tree-node.cshtml -->
+@{
+  // Model (IDocument theDocumentToLinkTo, bool hasChildren)
+  // The document for the sidebar link and whether it has children is passed in as the model
+  string? activeClass = Document.IdEquals(Model.Document) ? "active": null;
+  // string? hasChildrenClass = @Model.HasChildren ? "has-children" : null;
+}
+
+@inherits BaseStatiqRazorPage<(IDocument Document, bool HasChildren)>
+
+<div class="@activeClass">
+  @Html.DocumentLink(Model.Document)
+</div>

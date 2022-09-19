@@ -74,7 +74,7 @@ The code uses a regular expression to ensure the value is a string in a format o
 
 Because us British like the word colour to be spelled correctly, we should really add a parameter to the component to allow its consumer to specify a custom error message to use when the value passed is invalid. Add a `[Parameter]` property. It may be called whatever we wish, but **ParsingErrorMessage** is the standard name used in Blazor.
 
-\[Parameter\]
+[Parameter]
 public string ParsingErrorMessage { get; set; }
 
 And then change the code that sets the `validationErrorMessage` in our `TryParseValueFromString` method to use that parameter instead of our hard-coded error message.
@@ -103,7 +103,7 @@ Our entire component should now look like this:
 <input type="color" @attributes=AdditionalAttributes class=@CssClass @bind=CurrentValueAsString/>
 
 @code {
-	\[Parameter\] public string ParsingErrorMessage { get; set; }
+	[Parameter] public string ParsingErrorMessage { get; set; }
 
 	public static string ColorToString(Color value)
 		=> $"#{value.R:x2}{value.G:x2}{value.B:x2}";

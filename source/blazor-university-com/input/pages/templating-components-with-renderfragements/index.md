@@ -32,7 +32,7 @@ But what if we want to embed some content? Give it a try and then look at the er
 Now change the `Collapsible` component so that it has a property named `ChildContent`, a type of `RenderFragment`, and make sure it is decorated with a `[Parameter]` attribute.
 
 @code {
-	\[Parameter\]
+	[Parameter]
 	public RenderFragment ChildContent { get; set; }
 }
 
@@ -50,10 +50,10 @@ These are the criteria Blazor uses to inject embedded content into a component. 
 
 @code
 {
-	\[Parameter\]
+	[Parameter]
 	public RenderFragment ChildContent { get; set; }
 
-	\[Parameter\]
+	[Parameter]
 	public bool Collapsed { get; set; }
 
 	string ActionText { get => Collapsed ? "Expand" : "Collapse"; }

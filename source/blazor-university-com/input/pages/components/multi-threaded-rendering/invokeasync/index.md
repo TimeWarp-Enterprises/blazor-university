@@ -89,10 +89,10 @@ In the **/Shared** folder, create a new file named **IncrementCounter.razor**. W
 </div>
 @code
 {
-	\[Parameter\]
+	[Parameter]
 	public bool ShouldUseInvokeAsync { get; set; }
 
-	\[Parameter\]
+	[Parameter]
 	public System.Threading.WaitHandle Trigger { get; set; }
 
  	// More to come

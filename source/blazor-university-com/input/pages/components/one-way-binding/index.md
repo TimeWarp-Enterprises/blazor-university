@@ -46,7 +46,7 @@ This tells us clearly what is missing. To add a parameter to our component we mu
 </div>
 
 @code {
-	\[Parameter\]
+	[Parameter]
 	public int CurrentCounterValue { get; set; }
 }
 

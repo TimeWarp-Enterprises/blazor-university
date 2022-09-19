@@ -17,7 +17,7 @@ This method is executed whenever the parent renders.
 
 Parameters that were passed into the component are contained in a `ParameterView`. This is a good point at which to make asynchronous calls to a server (for example) based on the state passed into the component.
 
-The component’s \[Parameter\] properties are assigned their values when you call base.SetParametersAsync(parameters) inside your override.
+The component’s [Parameter] properties are assigned their values when you call base.SetParametersAsync(parameters) inside your override.
 
 It is also the correct place to assign default parameter values. See [Optional route parameters](/routing/optional-route-parameters/) for a full explanation.
 

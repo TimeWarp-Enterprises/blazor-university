@@ -44,7 +44,7 @@ Capturing the value of a parameter is as simple as adding a property with the sa
 </ul>
 
 @code {
-  \[Parameter\]
+  [Parameter]
   public string CustomerId { get; set; }
 }
 ```

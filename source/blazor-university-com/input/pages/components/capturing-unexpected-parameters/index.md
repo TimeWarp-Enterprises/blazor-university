@@ -14,7 +14,7 @@ Previously we've seen how to declare parameters and cascading parameters with sp
 
 @code 
 {
-	\[Parameter\]
+	[Parameter]
 	public string src { get; set; }
 }
 ```
@@ -28,10 +28,10 @@ During review it is pointed out that images without an `alt` tag are not very ac
 
 @code 
 {
-	\[Parameter\]
+	[Parameter]
 	public string src { get; set; }
 	
-	\[Parameter\]
+	[Parameter]
 	public string alt { get; set; }
 }
 ```
@@ -57,10 +57,10 @@ Capturing values of attributes without matching parameters works in a similar wa
 
 @code 
 {
-	\[Parameter\]
+	[Parameter]
 	public string src { get; set; }
 
-	\[Parameter\]
+	[Parameter]
 	public string alt { get; set; }
 
 	\[Parameter(CaptureUnmatchedValues = true)\]

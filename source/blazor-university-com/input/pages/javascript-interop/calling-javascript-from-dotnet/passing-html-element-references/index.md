@@ -114,7 +114,7 @@ In the **/Shared** folder create a new component named **Autofocus.razor** and e
 ```razor
 @inject IJSRuntime JSRuntime
 @code {
-    \[Parameter\]
+    [Parameter]
     public ElementReference Control { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -210,7 +210,7 @@ Change the AutoFocus control to accept a `Func` and, for good measure, ensure th
 ```razor
 @inject IJSRuntime JSRuntime
 @code {
-    \[Parameter\]
+    [Parameter]
     public Func<ElementReference> GetControl { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

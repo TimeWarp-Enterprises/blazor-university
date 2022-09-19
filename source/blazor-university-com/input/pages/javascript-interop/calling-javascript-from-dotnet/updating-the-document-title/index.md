@@ -36,7 +36,7 @@ Finally, we need the `Document` component itself. In the /Shared folder create a
 ```razor
 @inject IJSRuntime JSRuntime
 @code {
-    \[Parameter\]
+    [Parameter]
     public string Title { get; set; }
 
     protected override async Task OnParametersSetAsync()
@@ -65,7 +65,7 @@ The problem here is that when the pre-render phase runs, there is no browser for
 ```razor
 @inject IJSRuntime JSRuntime
 @code {
-    \[Parameter\]
+    [Parameter]
     public string Title { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

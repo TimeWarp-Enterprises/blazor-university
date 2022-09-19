@@ -38,7 +38,7 @@ For example `:int` will only match the component's URL if it contains a valid in
 </ul>
 
 @code {
-    \[Parameter\]
+    [Parameter]
     public int? OrderNumber { get; set; }
 }
 ```

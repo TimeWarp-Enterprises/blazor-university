@@ -4,7 +4,7 @@ public class MetaDataKeys
 {
   public const string SiteTitle = nameof(SiteTitle);
   // public const string ImageUrl = nameof(ImageUrl);
-  // public const string ShowInNavbar = nameof(ShowInNavbar);
+  public const string ShowInSidebar = nameof(ShowInSidebar);
 
   // /// <summary>
   // /// A glob pattern configured in settings.yml

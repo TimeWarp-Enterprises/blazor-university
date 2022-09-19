@@ -11,12 +11,15 @@
   <div class="flex flex-col flex-grow mx-auto lg:max-w-6xl ">
     @Html.Partial("partials/_header.cshtml")
     <!-- Main  -->
-      @Html.Partial("partials/_main-header.cshtml")
-      <div
-        class="w-3/4 p-2 mx-auto prose max-w-none lg:p-10 bg-zinc-200 dark:bg-slate-800 dark:prose-invert "
-      >
-        @Html.Partial("partials/_edit-in-github-link.cshtml")
-        @RenderBody()
+      @await Html.PartialAsync("partials/_main-header.cshtml")
+      <div class="flex flex-row">
+        @await Html.PartialAsync("partials/_sidebar.cshtml")
+        <div
+          class="w-3/4 p-2 mx-auto prose max-w-none lg:p-10 bg-zinc-200 dark:bg-slate-800 dark:prose-invert "
+        >
+          @Html.Partial("partials/_edit-in-github-link.cshtml")
+          @RenderBody()
+        </div>
       </div>
       <!-- Main Footer -->
       @* @Html.Partial("partials/_main-footer.cshtml") *@

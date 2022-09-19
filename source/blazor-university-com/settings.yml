@@ -1,4 +1,5 @@
 ﻿Layout: /_layout.cshtml
 SiteTitle: Blazor University
+EditRoot: https://github.com/TimeWarpEngineering/blazor-university/edit/main/input
 # PostSources: "posts/**/*.{md,cshtml,html}" # This requires quotes becuase of the `{}` characters
 # SourceFiles:

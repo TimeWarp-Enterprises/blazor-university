@@ -13,7 +13,7 @@ Once a public property of type `EventCallback<T>` has been declared and decorate
 
 In a new Blazor app, edit the **/Pages/Counter.razor** file and add a new callback parameter.
 
-\[Parameter\]
+[Parameter]
 public EventCallback<int> OnMultipleOfThree { get; set; }
 
 This declares a new `EventCallback` named OnMultipleOfThree that any consuming component can register an interest in. The `<int>` specifies that the value emitted by the event callback will be a `System.Int32`.
@@ -109,10 +109,10 @@ Change the **Counter** component to match the following code:
 @code {
 	private int currentCount = 0;
 
-	\[Parameter\]
+	[Parameter]
 	public Action<int> OnMultipleOfTwoAction { get; set; }
 
-	\[Parameter\]
+	[Parameter]
 	public EventCallback<int> OnMultipleOfThree { get; set; }
 
 	private async Task IncrementCount()

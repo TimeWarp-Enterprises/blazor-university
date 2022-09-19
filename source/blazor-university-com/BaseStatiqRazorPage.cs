@@ -4,7 +4,6 @@ using Statiq.Razor;
 using System.Text.Json;
 
 public abstract class BaseStatiqRazorPage<TModel> : StatiqRazorPage<TModel>
-  where TModel : IDocument
 {
 
   #region Document
@@ -25,7 +24,8 @@ public abstract class BaseStatiqRazorPage<TModel> : StatiqRazorPage<TModel>
   #endregion
 
   #region  Outputs
-  // public bool IsPost => Outputs.FilterSources(Context.GetString(MetaDataKeys.PostSources)).ContainsById(Document);
+  public IDocument GetRoot() => OutputPages.Get($"index.html");
+
   public FilteredDocumentList<IDocument> AtomFeeds => Outputs["**/*.atom"];
   public FilteredDocumentList<IDocument> RssFeeds => Outputs["**/*.rss"];
 

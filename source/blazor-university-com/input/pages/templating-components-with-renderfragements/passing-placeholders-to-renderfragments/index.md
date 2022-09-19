@@ -9,7 +9,7 @@ date: "2020-04-18"
 
 At first, it might seem unintuitive, or perhaps a little odd, to think of declaring a `[Parameter]` property of type `RenderFragment<RenderFragment>`.
 
-\[Parameter\]
+[Parameter]
 public RenderFragment<RenderFragment> ChildContent { get; set; }
 
 The fact is, if you have ever created a [Custom Blazor layout](/layouts/creating-a-blazor-layout/) then you are already familiar with a similar concept.
@@ -70,10 +70,10 @@ Next, we need to create a new component in **/Shared** named **DataList.razor**.
 </ul>
 @code
 {
-	\[Parameter\]
+	[Parameter]
 	public IEnumerable<TItem> Data { get; set; }
 
-	\[Parameter\]
+	[Parameter]
 	public RenderFragment<TItem> ItemTemplate { get; set; }
 }
 
@@ -170,7 +170,7 @@ The DataList component needs to render each item in the `Data` property, and the
 
 First, we'll add the `ListTemplate` property to our DataList component.
 
-\[Parameter\]
+[Parameter]
 public RenderFragment<RenderFragment> ListTemplate { get; set; }
 
 Next we'll change our DataList so that it uses `<ul>` and `<li>` as a default when no `ListTemplate` has been specified by the consumer, after that we'll deal with the scenario where the consumer does want to use a custom `ListTemplate`.
@@ -192,13 +192,13 @@ This is the easy part. All we need to do is to write our mark-up as if there wer
 
 @code
 {
-	\[Parameter\]
+	[Parameter]
 	public IEnumerable<TItem> Data { get; set; }
 
-	\[Parameter\]
+	[Parameter]
 	public RenderFragment<TItem> ItemTemplate { get; set; }
 
-	\[Parameter\]
+	[Parameter]
 	public RenderFragment<RenderFragment> ListTemplate { get; set; }
 }
 
@@ -278,13 +278,13 @@ else
 
 @code
 {
-	\[Parameter\]
+	[Parameter]
 	public IEnumerable<TItem> Data { get; set; }
 
-	\[Parameter\]
+	[Parameter]
 	public RenderFragment<TItem> ItemTemplate { get; set; }
 
-	\[Parameter\]
+	[Parameter]
 	public RenderFragment<RenderFragment> ListTemplate { get; set; }
 }
 

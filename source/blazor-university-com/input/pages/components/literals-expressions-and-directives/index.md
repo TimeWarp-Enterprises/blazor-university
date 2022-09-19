@@ -41,10 +41,10 @@ Where **MyHeader** is defined as so:
 
 @code
 {
-	\[Parameter\]
+	[Parameter]
 	public bool Visible { get; set; } = true;
 
-	\[Parameter\]
+	[Parameter]
 	public string Text { get; set; }
 }
 
@@ -140,7 +140,7 @@ To prove that Blazor passes objects by reference to other components, create a n
 </div>
 @code
 {
-  \[Parameter\]
+  [Parameter]
   public Person Person { get; set; }
 }
 
