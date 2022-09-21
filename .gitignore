@@ -348,3 +348,6 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/source/blazor-university-com/input/css/Site.css
+/source/blazor-university-com/output/
+/source/blazor-university-com/cache/
