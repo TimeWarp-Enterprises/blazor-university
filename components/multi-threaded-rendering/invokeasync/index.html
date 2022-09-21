@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<!-- _layout.cshtml -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!-- _head.cshtml -->
+<head>
+  <title>Blazor University - Thread safety using InvokeAsync</title>
+  <!-- _meta-tags.cshtml -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta charset="UTF-8">
+<meta name="title" content="Blazor University - Thread safety using InvokeAsync">
+<meta name="description">
+
+<!-- Open Graph / Facebook / Twitter -->
+<meta property="og:site_name" content="Blazor University">
+<meta property="og:url" content="/components/multi-threaded-rendering/invokeasync">
+<meta property="og:title" content="Blazor University - Thread safety using InvokeAsync">
+<meta property="og:description">
+
+  <!-- _links.cshtml -->
+
+<link rel="canonical" href="/components/multi-threaded-rendering/invokeasync">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link href="/css/Site.css" rel="stylesheet" type="text/css">
+<!-- using prism for syntax highlighting -->
+<link rel="stylesheet" title="highlight_light" href="/css/prism-light.css" disabled="disabled">
+<link rel="stylesheet" title="highlight_dark" href="/css/prism-dark.css" disabled="disabled">
+
+</head>
+
+<body class="flex flex-col min-h-screen bg-zinc-200 dark:bg-slate-800 text-zinc-800 dark:text-zinc-100">
+  <div className="fixed inset-0 flex justify-center sm:px-8">
+    <div className="flex w-full max-w-7xl lg:px-8">
+      <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20"></div>
+    </div>
+  </div>
+  <div class="flex flex-col flex-grow mx-auto lg:max-w-6xl ">
+    <!-- _header.cshtml -->
+<header class="mx-auto">
+  <img class="px-10 mx-auto" src="/images/blazor-university-circle.png" />
+  <!-- _search.cshtml -->
+<button
+  type="button"
+  className="group flex h-6 w-6 items-center justify-center sm:justify-start md:h-auto md:w-80 md:flex-none md:rounded-lg md:py-2.5 md:pl-4 md:pr-3.5 md:text-sm md:ring-1 md:ring-slate-200 md:hover:ring-slate-300 dark:md:bg-slate-800/75 dark:md:ring-inset dark:md:ring-white/5 dark:md:hover:bg-slate-700/40 dark:md:hover:ring-slate-500 lg:w-96"
+  onClick={onOpen}
+>
+  <svg
+    aria-hidden="true"
+    className="h-5 w-5 flex-none fill-slate-400 group-hover:fill-slate-500 dark:fill-slate-500 md:group-hover:fill-slate-400"
+  >
+    <path d="M16.293 17.707a1 1 0 0 0 1.414-1.414l-1.414 1.414ZM9 14a5 5 0 0 1-5-5H2a7 7 0 0 0 7 7v-2ZM4 9a5 5 0 0 1 5-5V2a7 7 0 0 0-7 7h2Zm5-5a5 5 0 0 1 5 5h2a7 7 0 0 0-7-7v2Zm8.707 12.293-3.757-3.757-1.414 1.414 3.757 3.757 1.414-1.414ZM14 9a4.98 4.98 0 0 1-1.464 3.536l1.414 1.414A6.98 6.98 0 0 0 16 9h-2Zm-1.464 3.536A4.98 4.98 0 0 1 9 14v2a6.98 6.98 0 0 0 4.95-2.05l-1.414-1.414Z" />
+  </svg>
+
+
+  <span className="sr-only md:not-sr-only md:ml-2 md:text-slate-500 md:dark:text-slate-400">
+    Search docs
+  </span>
+  <kbd className="ml-auto hidden font-medium text-slate-400 dark:text-slate-500 md:block">
+    <kbd className="font-sans">⌘</kbd>
+    <kbd className="font-sans">Ctrl</kbd>
+    <kbd className="font-sans">K</kbd>
+  </kbd>
+</button>
+
+  <!-- _navigation.cshtml-->
+
+</header>
+
+    <!-- Main  -->
+    <div class="flex flex-col flex-grow w-full mx-auto mt-2">
+      <!-- _main-header.cshtml -->
+<header class="w-full px-4 mx-auto">
+  <!-- _announcement.cshtml -->
+
+<div id="page-banner">
+  <div id="page-banner_header">Join me for live Blazor coding!</div>
+  <div id="page-banner_body">
+    <a href="https://www.twitch.tv/mrpeterlmorris/schedule?seriesID=2a667d82-38aa-4aac-9909-b0e7682236a8">Wednesday at 6pm (UK Time) on Twitch.Tv</a>
+  </div>
+</div>
+
+  <h1
+    class="text-4xl font-bold tracking-tight text-center sm:text-5xl"
+  >
+    Thread safety using InvokeAsync
+  </h1>
+  <div class="invisible mt-4 text-sm text-center text-blue-500 uppercase">
+    Wednesday, September 21, 2022
+  </div>
+  <!--image-->
+</header>
+
+      <div class="flex flex-row">
+        <!-- _sidebar.cshtml -->
+
+<section id="left-sidebar">
+  <nav class="content-menu">
+    <!-- _tree.cshtml -->
+      <div class="hidden menu-group overflow-hidden" data-group-id=f8caf663-c33e-418d-9683-5c8bd6bcb8e3>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=e9eaac19-52a7-474a-a585-7aaf61a44fde data-doc-title="Component libraries">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/component-libraries">Component libraries</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=1b6e3220-b119-41c5-ac1e-436f5ec3bd93 data-doc-title="Components">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components">Components</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=1b6e3220-b119-41c5-ac1e-436f5ec3bd93>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=924fa308-b2aa-42c0-858f-2555dd599d98 data-doc-title="Capturing unexpected parameters">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/capturing-unexpected-parameters">Capturing unexpected parameters</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=78d4ab91-dca5-4afc-9515-65c914b4faca data-doc-title="Cascading values">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components/cascading-values">Cascading values</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=78d4ab91-dca5-4afc-9515-65c914b4faca>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=cf68fe4a-b3b2-4190-9ec9-0064bbab079c data-doc-title="Cascading values by name">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/cascading-values/cascading-values-by-name">Cascading values by name</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=5ae5b9e9-875d-4779-b7f9-bb25402fbf6f data-doc-title="Cascading values by type">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/cascading-values/cascading-values-by-type">Cascading values by type</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=b80338fe-018a-425b-b802-5a0ea5e4da24 data-doc-title="Overriding cascaded values">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/cascading-values/overriding-cascaded-values">Overriding cascaded values</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=4d5e957d-aa92-4fa2-a428-d1583b331a80 data-doc-title="Code generated HTML attributes">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/code-generated-html-attributes">Code generated HTML attributes</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=34e0f5b5-e26b-4d8d-b5b6-887bcc2d1caf data-doc-title="Component events">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components/component-events">Component events</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=34e0f5b5-e26b-4d8d-b5b6-887bcc2d1caf>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=f4446c6d-54fb-4546-9a70-3bed6d89c0e1 data-doc-title="Browser DOM events">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/component-events/browser-dom-events">Browser DOM events</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=f7add840-07a0-4c19-b4be-0c4b7e5d68b2 data-doc-title="Component lifecycles">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/component-lifecycles">Component lifecycles</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=541403c7-eef7-4966-91c4-55ca8a541247 data-doc-title="Creating a component">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/creating-a-component">Creating a component</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=9a47eb4d-fd52-4afb-96f9-bba10171f7e2 data-doc-title="Literals, expressions, and directives">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components/literals-expressions-and-directives">Literals, expressions, and directives</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=9a47eb4d-fd52-4afb-96f9-bba10171f7e2>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=b0e814a8-45e0-4471-a1c0-03936058f393 data-doc-title="Directives">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/literals-expressions-and-directives/directives">Directives</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=dfbe4c0a-6f7b-487a-9b6f-4b2975adad69 data-doc-title="Multi-threaded rendering">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components/multi-threaded-rendering">Multi-threaded rendering</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=dfbe4c0a-6f7b-487a-9b6f-4b2975adad69>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=11d2db42-aa6e-428f-84aa-c00c22104294 data-doc-title="Thread safety using InvokeAsync">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item active">
+  <a href="/components/multi-threaded-rendering/invokeasync">Thread safety using InvokeAsync</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=5477b9cb-6be6-4235-9b25-23e5a234b395 data-doc-title="One-way binding">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/one-way-binding">One-way binding</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=6cc9b596-ca94-4b8a-8872-07c49eaad4d0 data-doc-title="Render trees">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components/render-trees">Render trees</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=6cc9b596-ca94-4b8a-8872-07c49eaad4d0>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=0cd41df8-7fc0-45f0-8043-f162790ed71a data-doc-title="Incremental RenderTree proof">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/render-trees/incremental-rendertree-proof">Incremental RenderTree proof</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=f0ca38b7-64e7-4b8b-bca1-01dd0581616c data-doc-title="Optimising using @key">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/render-trees/optimising-using-key">Optimising using @key</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=7f9d1f89-1831-4198-aa4a-34bfc5e5a166 data-doc-title="Replacing attributes on child components">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/replacing-attributes-on-child-components">Replacing attributes on child components</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=a7ac98b1-93e1-4357-9d30-73d19626fe28 data-doc-title="Two-way binding">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components/two-way-binding">Two-way binding</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=a7ac98b1-93e1-4357-9d30-73d19626fe28>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=c433163f-6574-4b6e-be08-ae95b3cc021a data-doc-title="Binding directives">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/two-way-binding/binding-directives">Binding directives</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=7d75cb5c-7120-482e-9e8e-e419ae70bb91 data-doc-title="Dependency injection">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection">Dependency injection</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=7d75cb5c-7120-482e-9e8e-e419ae70bb91>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=9df72fc4-2913-46e1-88bf-2ea9a1031f88 data-doc-title="Component scoped dependencies">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/component-scoped-dependencies">Component scoped dependencies</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=9df72fc4-2913-46e1-88bf-2ea9a1031f88>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=bcd7803f-4fe3-4f3c-bf82-aaf45c49fcf3 data-doc-title="Owning multiple dependencies: The right way">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/component-scoped-dependencies/owning-multiple-dependencies-the-right-way">Owning multiple dependencies: The right way</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=8d426a01-e3f9-46e5-919c-959241c55fa0 data-doc-title="Owning multiple dependencies: The wrong way">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/component-scoped-dependencies/owning-multiple-dependencies-the-wrong-way">Owning multiple dependencies: The wrong way</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=4799b425-83d5-44b4-a738-81a167776998 data-doc-title="OwningComponentBase&amp;lt;T&amp;gt;">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/component-scoped-dependencies/owningcomponentbase-generic">OwningComponentBase&amp;lt;T&amp;gt;</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=3afb44da-3ad4-4588-bdeb-635d5eac0481 data-doc-title="Dependency lifetimes and scopes">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/dependency-lifetimes-and-scopes">Dependency lifetimes and scopes</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=3afb44da-3ad4-4588-bdeb-635d5eac0481>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=1663f74f-12a6-4bc9-a5a9-196a003042cc data-doc-title="Comparing dependency scopes">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/dependency-lifetimes-and-scopes/comparing-dependency-scopes">Comparing dependency scopes</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=540aad57-07ed-4a01-a23c-412f0c03d47b data-doc-title="Scoped dependencies">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/dependency-lifetimes-and-scopes/scoped-dependencies">Scoped dependencies</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=76a901f3-8a93-4724-8bc8-adae4add56ff data-doc-title="Singleton dependencies">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/dependency-lifetimes-and-scopes/singleton-dependencies">Singleton dependencies</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=7d51c9a8-a25e-475d-99e9-cd2ead537722 data-doc-title="Transient dependencies">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/dependency-lifetimes-and-scopes/transient-dependencies">Transient dependencies</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=6f0ac6bc-bcc0-4e9a-9fbe-8c3478f1979a data-doc-title="Injecting dependencies into Blazor components">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/injecting-dependencies-into-blazor-components">Injecting dependencies into Blazor components</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=9da41a98-39a2-4e57-a2d6-9a347697cbac data-doc-title="Forms">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/forms">Forms</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=9da41a98-39a2-4e57-a2d6-9a347697cbac>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=dac19bfa-de5e-4f60-a951-0cb702757b61 data-doc-title="Accessing form state">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/accessing-form-state">Accessing form state</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=9adf46ad-cc97-4133-bd0d-7e1cdf8fcb5d data-doc-title="Descending from InputBase&amp;lt;T&amp;gt;">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/descending-from-inputbase">Descending from InputBase&amp;lt;T&amp;gt;</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=553e91ce-8a39-4afb-92a6-57bc3814a841 data-doc-title="EditContext, FieldIdentifiers, and FieldState">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/editcontext-fieldidentifiers-and-fieldstate">EditContext, FieldIdentifiers, and FieldState</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=a529292a-8882-4ede-bda5-152d966085f4 data-doc-title="Editing form data">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/editing-form-data">Editing form data</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=6a16e1e6-95ea-4350-850b-3c4ad17cb93c data-doc-title="Handling form submission">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/handling-form-submission">Handling form submission</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=42d104e0-819e-46e1-bbf8-e1e813d532ef data-doc-title="Validation">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/validation">Validation</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=d018e895-2d73-4fad-b5c9-6f8b1b9aaa6e data-doc-title="Writing custom validation">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/writing-custom-validation">Writing custom validation</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=67215d6e-8d60-4a85-bb3b-5a936840afda data-doc-title="JavaScript interop">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop">JavaScript interop</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=67215d6e-8d60-4a85-bb3b-5a936840afda>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=df73c75e-33f5-4043-9994-cbcbbe38c340 data-doc-title="Calling .NET From JavaScript">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-dotnet-from-javascript">Calling .NET From JavaScript</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=df73c75e-33f5-4043-9994-cbcbbe38c340>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=8454a48a-558c-408f-bbfc-4f4b245d6ebc data-doc-title="Calling static .NET methods">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-dotnet-from-javascript/calling-static-dotnet-methods">Calling static .NET methods</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=89c5d7f2-83a1-40b6-a90f-c435c8f8c2ac data-doc-title="Lifetimes and memory leaks">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-dotnet-from-javascript/lifetimes-and-memory-leaks">Lifetimes and memory leaks</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=4217c451-263e-41b5-914b-66357b59bab5 data-doc-title="Type safety">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-dotnet-from-javascript/type-safety">Type safety</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=0e634915-b026-4feb-96ae-3b917a69a1e2 data-doc-title="Calling JavaScript from .NET">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-javascript-from-dotnet">Calling JavaScript from .NET</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=0e634915-b026-4feb-96ae-3b917a69a1e2>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=ea011d35-1d5b-4617-9d56-1153d18d3124 data-doc-title="Passing HTML element references">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-javascript-from-dotnet/passing-html-element-references">Passing HTML element references</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=98a44430-3c06-4143-8184-930afb4aa260 data-doc-title="Updating the document title">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-javascript-from-dotnet/updating-the-document-title">Updating the document title</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=bfda94df-d1ef-4654-8067-ea76ad0bd651 data-doc-title="JavaScript boot process">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/javascript-boot-process">JavaScript boot process</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=89f30b51-d5c4-4420-89ca-60f866e0d351 data-doc-title="Layouts">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/layouts">Layouts</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=89f30b51-d5c4-4420-89ca-60f866e0d351>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=d8b1c847-340e-42a1-b97b-400182d2898d data-doc-title="Creating a Blazor layout">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/layouts/creating-a-blazor-layout">Creating a Blazor layout</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=0ba6a786-62bc-47c2-83cc-494cb726c89c data-doc-title="Nested layouts">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/layouts/nested-layouts">Nested layouts</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=b986e0d3-50da-4a79-86c2-d46b6ecad427 data-doc-title="Using a layout">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/layouts/using-layouts">Using a layout</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=fa5483ec-fb39-4eef-a7cb-9a9bacdfda3a data-doc-title="Introduction">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/overview">Introduction</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=fa5483ec-fb39-4eef-a7cb-9a9bacdfda3a>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=c07a938a-6bc2-42fd-ba27-6f64bc3cbfb5 data-doc-title="Blazor hosting models">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/overview/blazor-hosting-models">Blazor hosting models</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=9e0443e9-76dc-4a61-b742-50a88508e69e data-doc-title="Creating a new project">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/overview/creating-a-new-project">Creating a new project</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=9f2e8b14-5463-4bba-941d-78f057c64bce data-doc-title="Creating a page">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/overview/creating-a-page">Creating a page</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=de315c3a-47da-4db0-8cf7-a1eb56fc9cbd data-doc-title="Installing Blazor">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/overview/installing-blazor">Installing Blazor</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=8a3f160f-2b3d-4470-89b0-9eacc42dddae data-doc-title="What is Blazor?">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/overview/what-is-blazor">What is Blazor?</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=f14e6605-ab2c-474f-bdf0-c4461e160a31 data-doc-title="What is WebAssembly?">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/overview/what-is-webassembly">What is WebAssembly?</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=b40f1ee8-1100-45b4-a5b6-46f5b4d08c79 data-doc-title="Routing">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/routing">Routing</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=b40f1ee8-1100-45b4-a5b6-46f5b4d08c79>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=f01ced73-fb5e-4534-a08d-2cd6ecfaba26 data-doc-title="404 - Not found">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/404-not-found">404 - Not found</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=917972d6-1178-4395-ac8b-8c6dbcc7a3c7 data-doc-title="Constraining route parameters">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/constraining-route-parameters">Constraining route parameters</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=df62f42f-7fa4-41a5-847e-67c13d319d0c data-doc-title="Defining routes">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/defining-routes">Defining routes</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=4dd41b77-3828-4a08-93bc-1fa1ef0d414a data-doc-title="Detecting navigation events">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/detecting-navigation-events">Detecting navigation events</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=259ca9fd-ecb4-42cd-be69-b47d7d6b743d data-doc-title="Navigating our app via code">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/navigating-our-app-via-code">Navigating our app via code</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=6bee09f1-5b4f-4d78-9366-fce4e7a1f464 data-doc-title="Navigating our app via HTML">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/navigating-our-app-via-html">Navigating our app via HTML</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=45c4bce5-2e42-42ce-8da0-4e21a3c56e79 data-doc-title="Optional route parameters">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/optional-route-parameters">Optional route parameters</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=5770bbd0-ddd9-4236-9e96-0ec54bbfb6f7 data-doc-title="Route parameters">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/route-parameters">Route parameters</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=b4f19001-e3b4-4ba4-8708-ebdb83fdcf7e data-doc-title="Templating components with RenderFragments">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/templating-components-with-renderfragements">Templating components with RenderFragments</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=b4f19001-e3b4-4ba4-8708-ebdb83fdcf7e>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=e0a9126c-3db1-4e31-9946-a1750329764b data-doc-title="Creating a TabControl">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/templating-components-with-renderfragements/creating-a-tabcontrol">Creating a TabControl</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=77817ab2-34d9-4375-9f96-e9d7b7a33502 data-doc-title="Passing data to a RenderFragment">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/templating-components-with-renderfragements/passing-data-to-a-renderfragement">Passing data to a RenderFragment</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=33edbb18-1f99-4ba9-8ccc-e3051758679f data-doc-title="Passing placeholders to RenderFragments">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/templating-components-with-renderfragements/passing-placeholders-to-renderfragments">Passing placeholders to RenderFragments</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=111aa7f6-feab-457f-8f36-028970f3b0f0 data-doc-title="Using @typeparam to create generic components">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/templating-components-with-renderfragements/using-typeparam-to-create-generic-components">Using @typeparam to create generic components</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+      </div>
+
+  </nav>
+</section>
+
+        <main
+          class="w-3/4 p-2 mx-auto prose max-w-none lg:p-10 bg-zinc-200 dark:bg-slate-800 dark:prose-invert "
+        >
+          <!-- _edit-in-github-link.cshtml -->
+
+<a class="flex flex-row justify-end gap-2 -mt-4 text-sm font-normal" href="https://github.com/TimeWarp-Enterprises/blazor-university/edit/main/input/pages/components/multi-threaded-rendering/invokeasync/index.md" target="_blank">
+  <span>
+    Edit This Page
+  </span>
+  <svg 
+  xmlns="http://www.w3.org/2000/svg" 
+  fill="none" 
+  viewBox="0 0 24 24" 
+  stroke-width="1.5" 
+  stroke="currentColor"
+  class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round"
+    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+</svg>
+
+</a>
+
+          <p>In circumstances where our code is called by a non-UI event (such as the ones outlined in <a href="https://blazor-university.com/components/multi-threaded-rendering/">Multi-threaded rendering)</a>, we would ordinarily need to implement some kind of thread locking/synchronisation if we intend to manipulate state.</p>
+<p><strong>Recap</strong>: Non-UI events include:</p>
+<ul>
+<li>A callback from a System.Threading.Timer</li>
+<li>An event triggered by another thread on a Singleton instance shared by multiple users</li>
+<li>A data push from another server we've connected to via a Web Socket.</li>
+</ul>
+<p>To avoid having to write thread-safe code, people writing a WPF app might use <code>Dispatcher.Invoke</code> to ensure the UI thread executes the code, and WinForms developers might use the <code>Invoke</code> method of the form. Any code invoked in this manner is always executed by a specific thread (the UI thread), which avoids the use for thread sychronising code.</p>
+<p>The <a href="https://blazor-university.com/components/component-events/">StateHasChanged</a> framework method, which is used to tell Blazor to re-render our component, does not allow multiple threads to access the rendering process at the same time. If <code>StateHasChanged</code> is called by a secondary thread an exception will be thrown.</p>
+<blockquote>
+<p>System.InvalidOperationException: The current thread is not associated with the Dispatcher.</p>
+</blockquote>
+<p>In a server-side Blazor application, there is a single dispatcher associated with each connection (each browser tab). When we use <code>InvokeAsync</code> we are executing actions via this dispatcher (just like WPF <code>Dispatcher.Invoke</code> or WinForms <code>Control.Invoke</code>).</p>
+<p>When calling <code>StateHasChanged</code> in one the previously outlined scenarios (executing code from a <code>Thread</code> etc), it is necessary to invoke it via the <code>InvokeAsync()</code> method. The <code>InvokeAsync</code> will serialise the work, and so will avoid <code>StateHasChanged</code> throwing an exception.</p>
+<p>Although methods will be executed by any number of different threads, only one thread will be accessing components at any given moment, eliminating the need to write thread-locking/synchronisation code around shared state.</p>
+<h2 id="invokeasync-example">InvokeAsync example</h2>
+<p><a href="https://github.com/mrpmorris/blazor-university/tree/master/src/Components/UsingInvokeAsync"><img src="images/SourceLink-e1567978928628.png" alt="" /></a></p>
+<p>To demonstrate the different in behaviour between executing component methods directly from a thread vs executing via <code>InvokeAsync</code>, we'll create a server-side application that will show how multiple concurrent threads can corrupt shared state.</p>
+<p>After creating a new Blazor server-side application, add a static class that will store an integer value that can be accessed by multiple components/threads.</p>
+<p>public static class CounterState
+{
+public static int Value { get; set; }
+}</p>
+<h3 id="displaying-the-state">Displaying the state</h3>
+<p>We'll show the value of this state in a component, and have the value checked twice per second. To do this, we'll create a component in the <strong>/Shared</strong> folder named <strong>ShowCounterValue.razor</strong>.</p>
+<p>&#64;implements IDisposable</p>
+<div>
+	Counter value is: &#64;CounterState.Value at &#64;DateTime.UtcNow.ToString("HH:mm:ss")
+</div>
+<p>&#64;code
+{
+private System.Threading.Timer Timer;</p>
+<pre><code>protected override void OnInitialized()
+{
+	base.OnInitialized();
+	Timer = new System.Threading.Timer(\_ =&gt;
+	{
+		InvokeAsync(StateHasChanged);
+	}, null, 500, 500);
+}
+
+void IDisposable.Dispose()
+{
+	Timer?.Dispose();
+	Timer = null;
+}
+</code></pre>
+<p>}</p>
+<ul>
+<li><strong>Line1</strong><br />
+Declares our component implements <code>IDisposable</code></li>
+<li><strong>Line 3</strong><br />
+Displays the current value of <code>CounterState.Value</code> along with the current time.</li>
+<li><strong>Line 13</strong><br />
+When the component initialises, a <code>System.Threading.Timer</code> is created that will execute <code>StateHasChanged</code> every 500 milliseconds. It is invoked via <code>InvokeAsync</code> to prevent Blazor throwing an exception telling us we are calling <code>StateHasChanged</code> from a thread.</li>
+<li><strong>Line 21</strong><br />
+Disposes the timer when the component is disposed.</li>
+</ul>
+<p><strong>Note:</strong> If the timer is not disposed then it will remain active for the lifetime of the user session. If the timer remains active, then the component will not be garbage collected because the timer callback holds an implicit reference to the component via its <code>InvokeAsync</code> and <code>StateHasChanged</code> methods.</p>
+<h3 id="modifying-the-state">Modifying the state</h3>
+<p>We'll now create a component that will increment the <code>CounterState.Value</code> field. Each component will perform a loop in a thread and update the <code>Value</code> 1000 times. We can then have multiple instances of this component on our main page, to ensure multiple threads are updating the state.</p>
+<p>Note: This component will be passed a <code>System.Threading.WaitHandle</code>. The component's thread will be suspended until the main page triggers this <code>WaitHandle</code>, triggering all threads to start looping at the same time.</p>
+<p>In the <strong>/Shared</strong> folder, create a new file named <strong>IncrementCounter.razor</strong>. We'll start off with some text to show the component exists on the page, a parameter to accept the required <code>WaitHandle</code>, and a parameter to indicate if we want to use <code>InvokeAsync</code> to increment the value or not.</p>
+<div>
+	Incrementing...
+</div>
+&#64;code
+{
+	[Parameter]
+	public bool ShouldUseInvokeAsync { get; set; }
+<pre><code>[Parameter]
+public System.Threading.WaitHandle Trigger { get; set; }
+
+// More to come
+</code></pre>
+<p>}</p>
+<p>To increment the <code>CounterState.Value</code>, we'll create a thread in the <code>OnInitialized</code> <a href="https://blazor-university.com/components/component-lifecycles/">lifecycle method</a>. We'll start the thread immediately, but the first instruction in the thread will be to suspend itself until our <code>WaitHandle</code> is triggered.</p>
+<p>protected override void OnInitialized()
+{
+var thread = new System.Threading.Thread(_ =&gt;
+{
+Trigger.WaitOne();
+for (int i = 0; i &lt; 1000; i++)
+{
+if (!ShouldUseInvokeAsync)
+{
+CounterState.Value++;
+}
+else
+{
+InvokeAsync(() =&gt; CounterState.Value++);
+}
+}
+});</p>
+<pre><code>thread.Start();
+</code></pre>
+<p>}</p>
+<ul>
+<li><strong>Line 1</strong><br />
+Override <code>OnInitialized</code>.</li>
+<li><strong>Line 3</strong><br />
+Create a <code>Thread</code> to modify the shared state.</li>
+<li><strong>Line 5</strong><br />
+The first thing the thread should do is to wait for the parent page's <code>WaitHandle</code> to be triggered.</li>
+<li><strong>Line 6</strong><br />
+Perform 1000 changes to the shared state.</li>
+<li><strong>Line 8</strong><br />
+Check if we should use <code>InvokeAsync</code> or not.</li>
+<li><strong>Line 10</strong><br />
+Change the shared state directly from the <code>Thread</code>.</li>
+<li><strong>Line 14</strong><br />
+Use <code>InvokeAsync</code> to ensure sequential access when changing the shared state.</li>
+<li><strong>Line 19</strong><br />
+Start the <code>Thread</code> so it can wait to be triggered.</li>
+</ul>
+<h3 id="using-the-components-to-demonstrate-state-conflict">Using the components to demonstrate state conflict</h3>
+<p>The final step is to create some mark-up in our <code>Index</code> page that will create 5 of these components.</p>
+<p>To make the application more interesting, we will also</p>
+<ol>
+<li>Have a checkbox that will allow the user to specify if they want state changes to be performed via <code>InvokeAsync</code>.</li>
+<li>Allow the user to reset the state of the app and try again by clicking a button.</li>
+</ol>
+<p>We'll need some component state in our <code>Index</code> page to indicate that we are currently running a test, if the user wants to use <code>InvokeAsync</code>, and a <code>System.Threading.ManualReset</code> object that we can pass to our <code>IncrementCounter</code> to trigger the processing of their threads.</p>
+<p>private bool IsWorking;
+private bool UseInvokeAsync;
+private System.Threading.ManualResetEvent Trigger = new System.Threading.ManualResetEvent(false);</p>
+<p>For the mark-up, we'll need to use <a href="https://blazor-university.com/components/two-way-binding/">Two-way binding</a> to bind our <code>IsWorking</code> field to an HTML <code>&lt;input&gt;</code> element.</p>
+<div>
+	<input type="checkbox" &#64;bind=UseInvokeAsync id="UseInvokeAsyncCheckbox" />
+	<label for="UseInvokeAsyncCheckbox">Use InvokeAsync</label>
+</div>
+<p>Followed by a button the user can click to start a test run. The button should be disabled during the duration of a test run.</p>
+<div>
+	<button &#64;onclick=Start disabled=&#64;IsWorking>Start</button>
+</div>
+<p>We'll also want to use our <code>ShowCounterValue</code> to keep our user informed of the current value of <code>CounterState.Value</code>.</p>
+<ShowCounterValue />
+<p>And, finally for the mark-up, we will want to create 5 instances of the <code>IncrementCounter</code> component. These components will only be created once the test run starts, and will be disposed of once the run has completed. To achieve this, we only render them if <code>IsWorking</code> is <code>true</code>.</p>
+<p>&#64;if (IsWorking)
+{
+for (int i = 0; i &lt; 5; i++)
+{
+<IncrementCounter Trigger=&#64;Trigger ShouldUseInvokeAsync=&#64;UseInvokeAsync />
+}
+}</p>
+<ul>
+<li>Line 1<br />
+Only renders the components if <code>IsWorking</code> is <code>true</code>, indicating that a test run is in progress.</li>
+<li>Line 3<br />
+A loop to create 5 instances of our <code>IncrementCounter</code> component.</li>
+<li>Line 5<br />
+Creates an instance of <code>IncrementCounter</code>, passing in our <code>ManualResetEvent</code> (Trigger) and a <code>boolean</code> indicating if the user clicked <strong>Use InvokeAsync</strong> in the UI or not.</li>
+</ul>
+<p>The only code we have to write now is the <code>Start</code> method. This will simply reset the state, set <code>IsWorking</code> to true, trigger our components to start incrementing, and then set <code>IsWorking</code> to false.</p>
+<p>The <code>Index</code> page should now look like so:</p>
+<p>&#64;page &quot;/&quot;</p>
+<div>
+	<input type="checkbox" &#64;bind=UseInvokeAsync id="UseInvokeAsyncCheckbox" />
+	<label for="UseInvokeAsyncCheckbox">Use InvokeAsync</label>
+</div>
+<div>
+	<button &#64;onclick=Start disabled=&#64;IsWorking>Start</button>
+</div>
+<ShowCounterValue />
+&#64;if (IsWorking)
+{
+	for (int i = 0; i < 5; i++)
+	{
+		<IncrementCounter Trigger=&#64;Trigger ShouldUseInvokeAsync=&#64;UseInvokeAsync />
+	}
+}
+<p>&#64;code
+{
+private bool IsWorking;
+private bool UseInvokeAsync;
+private System.Threading.ManualResetEvent Trigger = new System.Threading.ManualResetEvent(false);</p>
+<pre><code>private async Task Start()
+{
+	CounterState.Value = 0;
+	IsWorking = true;
+	StateHasChanged();
+
+	await Task.Delay(500);
+	Trigger.Set();
+
+	await Task.Delay(1000);
+	IsWorking = false;
+	Trigger.Reset();
+}
+</code></pre>
+<p>}</p>
+<ul>
+<li><strong>Line 3</strong><br />
+Bind an HTML <code>&lt;input&gt;</code> to <code>UseInvokeAsync</code>.</li>
+<li><strong>Line 7</strong><br />
+A button that executes the <code>Start</code> method when clicked. The button is disabled if <code>IsWorking</code> is <code>true</code>.</li>
+<li><strong>Line 9</strong><br />
+Updates the UI with the current value of <code>CounterState.Value</code>.</li>
+<li><strong>Line 14</strong><br />
+Render some <code>IncrementCounter</code> components, but only if <code>IsWorking</code> is <code>true</code>.</li>
+<li><strong>Lines 26-28</strong><br />
+Reset the shared state to zero.</li>
+<li><strong>Line 30</strong><br />
+Wait for 500 milliseconds to give the threads in all of the components a chance to get started.</li>
+<li><strong>Line 31</strong><br />
+Trigger our <code>ManualResetEvent</code> (Trigger) so that all <code>IncrementCounter</code> components' threads can resume and start to modify shared state at the same time.</li>
+<li><strong>Lines 33-35</strong><br />
+Wait 1 second for the test to complete, and then reset <code>IsWorking</code> and our <code>ManualResetEvent</code> so they are ready for another rest run.</li>
+</ul>
+<h2 id="running-the-example-application">Running the example application</h2>
+<h3 id="running-without-invokeasync">Running without InvokeAsync</h3>
+<p>Run the application, and for the first test leave the <strong>Use InvokeAsync</strong> checkbox unticked. Then click the <strong>Start</strong> button and you'll see something like the following image.</p>
+<p><img src="images/ThreadingWithInvokeAsyncOff.jpg" alt="" /></p>
+<p>Followed 1 second later with a screen that looks like the following image. Note how the final <code>CounterState.Value</code> in my case is only 1202. Considering there are 5 components, each incrementing the value by 1 in a 1000 iteration loop, ideally we should be seeing 5000 as the final value.</p>
+<p><img src="images/ThreadingWithInvokeAsyncOff2.jpg" alt="" /></p>
+<h3 id="running-with-invokeasync">Running with InvokeAsync</h3>
+<p>Next, tick the checkbox and click the <strong>Start</strong> button again.</p>
+<p><img src="images/ThreadingWithInvokeAsyncOn.jpg" alt="" /></p>
+<p>One second later, the rest run will complete and we see a much more desirable result.</p>
+<p><img src="images/ThreadingWithInvokeAsyncOn2.jpg" alt="" /></p>
+<h2 id="summary">Summary</h2>
+<p>When working with UI triggered events (button clicks, navigation events, etc), we don't need to make any special considerations for thread safety. Blazor will manage this for us, and ensure only a single thread is executing component code at any one time.</p>
+<p>When non-UI events trigger our code, then in a server-side Blazor app then this code will be triggered in an unsynchronised thread. It is not possible to call <code>StateHasChanged</code>, and access to any shared state is prone to corruption due to <a href="https://en.wikipedia.org/wiki/Race_condition">thread race conditions</a>.</p>
+<p><strong>Note</strong>: Blazor WebAssembly apps are single-threaded so do not have to account for thread safety.</p>
+<p>The Blazor <code>InvokeAsync</code>, introduced on the class <code>ComponentBase</code>, will ensure that race conditions do not occur by synchronising thread execution per-user connection.</p>
+<p>Blazor is able to ensure that only a single thread is executing code at any given time by executing code via a Dispatcher that is created when a user connects to the Blazor server-side application.</p>
+<p>One possible complication to consider is that the Blazor Dispatcher will not ensure an entire piece of code runs to execution before the next dispatched code is executed. If all of the actions dispatched are synchronous code then this is the case, however, if any of the dispatched actions are asynchronous then that thread will relinquish its execution time as soon as it executes an <code>await</code> on some asynchronous code such as <code>Task.Delay</code> or an HTTP request.</p>
+<p>This means that although Blazor's <code>InvokeAsync</code> can guarantee threads are synchronised in their execution, it does not mean we can do without thread-safe code when using asynchronous resources such as queries to Entity Framework Core.</p>
+<p>The following code executed by two separate threads will result in more than one thread trying to use the same Entity Framework Core <code>DbContext</code> at the same time, even when invoked via <code>InvokeAsync</code>.</p>
+<p>IsLoading = true;
+StateHasChanged();</p>
+<p>Person[] people = await ApplicationDbContext.Person.ToArrayAsync();
+IsLoading = false;</p>
+<p>This is because the <code>await</code> statement relinquishes execution and allows Blazor to let a different logical chunk of code to execute.</p>
+<p>| First InvokeAsync | Second InvokeAsync |
+| --- | --- |
+| IsLoading = true;<br />
+StateHasChanged();<br />
+... <code>await</code> |  |
+|  | IsLoading = true;<br />
+StateHasChanged();<br />
+... <code>await</code> |
+| Person[] people =<br />
+(result from <code>await</code>) |  |
+|  | Person[] people =<br />
+(result from <code>await</code>) |</p>
+<p>In the preceding illustration, at step 2 the <code>ApplicationDbContext</code> has been instructed by two separate threads to perform an asynchronous operation. Because Entity Framework Core does not support thread reentrancy, it will throw an exception telling us that only a single thread may access the <code>DbContext</code> at any given time.</p>
+<p>So, although shared state is safe in synchronous code when executed via <code>InvokeAsync</code>, keep in mind that as soon as your code introduces an <code>await</code> it allows other threads the opportunity to step in until the <code>await</code> is complete.</p>
+
+        </main>
+      </div>
+      <!-- Main Footer -->
+    </div>
+    <!-- _scripts.cshtml -->
+<script src="/js/prism.js"></script>
+<script src="/js/tree.js"></script>
+
+  </div>
+</body>
+</html>

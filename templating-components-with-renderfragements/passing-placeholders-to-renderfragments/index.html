@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<!-- _layout.cshtml -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!-- _head.cshtml -->
+<head>
+  <title>Blazor University - Passing placeholders to RenderFragments</title>
+  <!-- _meta-tags.cshtml -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta charset="UTF-8">
+<meta name="title" content="Blazor University - Passing placeholders to RenderFragments">
+<meta name="description">
+
+<!-- Open Graph / Facebook / Twitter -->
+<meta property="og:site_name" content="Blazor University">
+<meta property="og:url" content="/templating-components-with-renderfragements/passing-placeholders-to-renderfragments">
+<meta property="og:title" content="Blazor University - Passing placeholders to RenderFragments">
+<meta property="og:description">
+
+  <!-- _links.cshtml -->
+
+<link rel="canonical" href="/templating-components-with-renderfragements/passing-placeholders-to-renderfragments">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link href="/css/Site.css" rel="stylesheet" type="text/css">
+<!-- using prism for syntax highlighting -->
+<link rel="stylesheet" title="highlight_light" href="/css/prism-light.css" disabled="disabled">
+<link rel="stylesheet" title="highlight_dark" href="/css/prism-dark.css" disabled="disabled">
+
+</head>
+
+<body class="flex flex-col min-h-screen bg-zinc-200 dark:bg-slate-800 text-zinc-800 dark:text-zinc-100">
+  <div className="fixed inset-0 flex justify-center sm:px-8">
+    <div className="flex w-full max-w-7xl lg:px-8">
+      <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20"></div>
+    </div>
+  </div>
+  <div class="flex flex-col flex-grow mx-auto lg:max-w-6xl ">
+    <!-- _header.cshtml -->
+<header class="mx-auto">
+  <img class="px-10 mx-auto" src="/images/blazor-university-circle.png" />
+  <!-- _search.cshtml -->
+<button
+  type="button"
+  className="group flex h-6 w-6 items-center justify-center sm:justify-start md:h-auto md:w-80 md:flex-none md:rounded-lg md:py-2.5 md:pl-4 md:pr-3.5 md:text-sm md:ring-1 md:ring-slate-200 md:hover:ring-slate-300 dark:md:bg-slate-800/75 dark:md:ring-inset dark:md:ring-white/5 dark:md:hover:bg-slate-700/40 dark:md:hover:ring-slate-500 lg:w-96"
+  onClick={onOpen}
+>
+  <svg
+    aria-hidden="true"
+    className="h-5 w-5 flex-none fill-slate-400 group-hover:fill-slate-500 dark:fill-slate-500 md:group-hover:fill-slate-400"
+  >
+    <path d="M16.293 17.707a1 1 0 0 0 1.414-1.414l-1.414 1.414ZM9 14a5 5 0 0 1-5-5H2a7 7 0 0 0 7 7v-2ZM4 9a5 5 0 0 1 5-5V2a7 7 0 0 0-7 7h2Zm5-5a5 5 0 0 1 5 5h2a7 7 0 0 0-7-7v2Zm8.707 12.293-3.757-3.757-1.414 1.414 3.757 3.757 1.414-1.414ZM14 9a4.98 4.98 0 0 1-1.464 3.536l1.414 1.414A6.98 6.98 0 0 0 16 9h-2Zm-1.464 3.536A4.98 4.98 0 0 1 9 14v2a6.98 6.98 0 0 0 4.95-2.05l-1.414-1.414Z" />
+  </svg>
+
+
+  <span className="sr-only md:not-sr-only md:ml-2 md:text-slate-500 md:dark:text-slate-400">
+    Search docs
+  </span>
+  <kbd className="ml-auto hidden font-medium text-slate-400 dark:text-slate-500 md:block">
+    <kbd className="font-sans">⌘</kbd>
+    <kbd className="font-sans">Ctrl</kbd>
+    <kbd className="font-sans">K</kbd>
+  </kbd>
+</button>
+
+  <!-- _navigation.cshtml-->
+
+</header>
+
+    <!-- Main  -->
+    <div class="flex flex-col flex-grow w-full mx-auto mt-2">
+      <!-- _main-header.cshtml -->
+<header class="w-full px-4 mx-auto">
+  <!-- _announcement.cshtml -->
+
+<div id="page-banner">
+  <div id="page-banner_header">Join me for live Blazor coding!</div>
+  <div id="page-banner_body">
+    <a href="https://www.twitch.tv/mrpeterlmorris/schedule?seriesID=2a667d82-38aa-4aac-9909-b0e7682236a8">Wednesday at 6pm (UK Time) on Twitch.Tv</a>
+  </div>
+</div>
+
+  <h1
+    class="text-4xl font-bold tracking-tight text-center sm:text-5xl"
+  >
+    Passing placeholders to RenderFragments
+  </h1>
+  <div class="invisible mt-4 text-sm text-center text-blue-500 uppercase">
+    Wednesday, September 21, 2022
+  </div>
+  <!--image-->
+</header>
+
+      <div class="flex flex-row">
+        <!-- _sidebar.cshtml -->
+
+<section id="left-sidebar">
+  <nav class="content-menu">
+    <!-- _tree.cshtml -->
+      <div class="hidden menu-group overflow-hidden" data-group-id=f8caf663-c33e-418d-9683-5c8bd6bcb8e3>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=e9eaac19-52a7-474a-a585-7aaf61a44fde data-doc-title="Component libraries">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/component-libraries">Component libraries</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=1b6e3220-b119-41c5-ac1e-436f5ec3bd93 data-doc-title="Components">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components">Components</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=1b6e3220-b119-41c5-ac1e-436f5ec3bd93>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=924fa308-b2aa-42c0-858f-2555dd599d98 data-doc-title="Capturing unexpected parameters">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/capturing-unexpected-parameters">Capturing unexpected parameters</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=78d4ab91-dca5-4afc-9515-65c914b4faca data-doc-title="Cascading values">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components/cascading-values">Cascading values</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=78d4ab91-dca5-4afc-9515-65c914b4faca>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=cf68fe4a-b3b2-4190-9ec9-0064bbab079c data-doc-title="Cascading values by name">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/cascading-values/cascading-values-by-name">Cascading values by name</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=5ae5b9e9-875d-4779-b7f9-bb25402fbf6f data-doc-title="Cascading values by type">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/cascading-values/cascading-values-by-type">Cascading values by type</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=b80338fe-018a-425b-b802-5a0ea5e4da24 data-doc-title="Overriding cascaded values">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/cascading-values/overriding-cascaded-values">Overriding cascaded values</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=4d5e957d-aa92-4fa2-a428-d1583b331a80 data-doc-title="Code generated HTML attributes">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/code-generated-html-attributes">Code generated HTML attributes</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=34e0f5b5-e26b-4d8d-b5b6-887bcc2d1caf data-doc-title="Component events">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components/component-events">Component events</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=34e0f5b5-e26b-4d8d-b5b6-887bcc2d1caf>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=f4446c6d-54fb-4546-9a70-3bed6d89c0e1 data-doc-title="Browser DOM events">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/component-events/browser-dom-events">Browser DOM events</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=f7add840-07a0-4c19-b4be-0c4b7e5d68b2 data-doc-title="Component lifecycles">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/component-lifecycles">Component lifecycles</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=541403c7-eef7-4966-91c4-55ca8a541247 data-doc-title="Creating a component">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/creating-a-component">Creating a component</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=9a47eb4d-fd52-4afb-96f9-bba10171f7e2 data-doc-title="Literals, expressions, and directives">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components/literals-expressions-and-directives">Literals, expressions, and directives</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=9a47eb4d-fd52-4afb-96f9-bba10171f7e2>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=b0e814a8-45e0-4471-a1c0-03936058f393 data-doc-title="Directives">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/literals-expressions-and-directives/directives">Directives</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=dfbe4c0a-6f7b-487a-9b6f-4b2975adad69 data-doc-title="Multi-threaded rendering">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components/multi-threaded-rendering">Multi-threaded rendering</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=dfbe4c0a-6f7b-487a-9b6f-4b2975adad69>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=11d2db42-aa6e-428f-84aa-c00c22104294 data-doc-title="Thread safety using InvokeAsync">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/multi-threaded-rendering/invokeasync">Thread safety using InvokeAsync</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=5477b9cb-6be6-4235-9b25-23e5a234b395 data-doc-title="One-way binding">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/one-way-binding">One-way binding</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=6cc9b596-ca94-4b8a-8872-07c49eaad4d0 data-doc-title="Render trees">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components/render-trees">Render trees</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=6cc9b596-ca94-4b8a-8872-07c49eaad4d0>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=0cd41df8-7fc0-45f0-8043-f162790ed71a data-doc-title="Incremental RenderTree proof">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/render-trees/incremental-rendertree-proof">Incremental RenderTree proof</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=f0ca38b7-64e7-4b8b-bca1-01dd0581616c data-doc-title="Optimising using @key">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/render-trees/optimising-using-key">Optimising using @key</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=7f9d1f89-1831-4198-aa4a-34bfc5e5a166 data-doc-title="Replacing attributes on child components">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/replacing-attributes-on-child-components">Replacing attributes on child components</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=a7ac98b1-93e1-4357-9d30-73d19626fe28 data-doc-title="Two-way binding">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components/two-way-binding">Two-way binding</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=a7ac98b1-93e1-4357-9d30-73d19626fe28>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=c433163f-6574-4b6e-be08-ae95b3cc021a data-doc-title="Binding directives">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/two-way-binding/binding-directives">Binding directives</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=7d75cb5c-7120-482e-9e8e-e419ae70bb91 data-doc-title="Dependency injection">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection">Dependency injection</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=7d75cb5c-7120-482e-9e8e-e419ae70bb91>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=9df72fc4-2913-46e1-88bf-2ea9a1031f88 data-doc-title="Component scoped dependencies">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/component-scoped-dependencies">Component scoped dependencies</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=9df72fc4-2913-46e1-88bf-2ea9a1031f88>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=bcd7803f-4fe3-4f3c-bf82-aaf45c49fcf3 data-doc-title="Owning multiple dependencies: The right way">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/component-scoped-dependencies/owning-multiple-dependencies-the-right-way">Owning multiple dependencies: The right way</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=8d426a01-e3f9-46e5-919c-959241c55fa0 data-doc-title="Owning multiple dependencies: The wrong way">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/component-scoped-dependencies/owning-multiple-dependencies-the-wrong-way">Owning multiple dependencies: The wrong way</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=4799b425-83d5-44b4-a738-81a167776998 data-doc-title="OwningComponentBase&amp;lt;T&amp;gt;">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/component-scoped-dependencies/owningcomponentbase-generic">OwningComponentBase&amp;lt;T&amp;gt;</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=3afb44da-3ad4-4588-bdeb-635d5eac0481 data-doc-title="Dependency lifetimes and scopes">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/dependency-lifetimes-and-scopes">Dependency lifetimes and scopes</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=3afb44da-3ad4-4588-bdeb-635d5eac0481>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=1663f74f-12a6-4bc9-a5a9-196a003042cc data-doc-title="Comparing dependency scopes">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/dependency-lifetimes-and-scopes/comparing-dependency-scopes">Comparing dependency scopes</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=540aad57-07ed-4a01-a23c-412f0c03d47b data-doc-title="Scoped dependencies">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/dependency-lifetimes-and-scopes/scoped-dependencies">Scoped dependencies</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=76a901f3-8a93-4724-8bc8-adae4add56ff data-doc-title="Singleton dependencies">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/dependency-lifetimes-and-scopes/singleton-dependencies">Singleton dependencies</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=7d51c9a8-a25e-475d-99e9-cd2ead537722 data-doc-title="Transient dependencies">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/dependency-lifetimes-and-scopes/transient-dependencies">Transient dependencies</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=6f0ac6bc-bcc0-4e9a-9fbe-8c3478f1979a data-doc-title="Injecting dependencies into Blazor components">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/injecting-dependencies-into-blazor-components">Injecting dependencies into Blazor components</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=9da41a98-39a2-4e57-a2d6-9a347697cbac data-doc-title="Forms">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/forms">Forms</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=9da41a98-39a2-4e57-a2d6-9a347697cbac>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=dac19bfa-de5e-4f60-a951-0cb702757b61 data-doc-title="Accessing form state">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/accessing-form-state">Accessing form state</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=9adf46ad-cc97-4133-bd0d-7e1cdf8fcb5d data-doc-title="Descending from InputBase&amp;lt;T&amp;gt;">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/descending-from-inputbase">Descending from InputBase&amp;lt;T&amp;gt;</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=553e91ce-8a39-4afb-92a6-57bc3814a841 data-doc-title="EditContext, FieldIdentifiers, and FieldState">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/editcontext-fieldidentifiers-and-fieldstate">EditContext, FieldIdentifiers, and FieldState</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=a529292a-8882-4ede-bda5-152d966085f4 data-doc-title="Editing form data">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/editing-form-data">Editing form data</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=6a16e1e6-95ea-4350-850b-3c4ad17cb93c data-doc-title="Handling form submission">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/handling-form-submission">Handling form submission</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=42d104e0-819e-46e1-bbf8-e1e813d532ef data-doc-title="Validation">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/validation">Validation</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=d018e895-2d73-4fad-b5c9-6f8b1b9aaa6e data-doc-title="Writing custom validation">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/writing-custom-validation">Writing custom validation</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=67215d6e-8d60-4a85-bb3b-5a936840afda data-doc-title="JavaScript interop">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop">JavaScript interop</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=67215d6e-8d60-4a85-bb3b-5a936840afda>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=df73c75e-33f5-4043-9994-cbcbbe38c340 data-doc-title="Calling .NET From JavaScript">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-dotnet-from-javascript">Calling .NET From JavaScript</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=df73c75e-33f5-4043-9994-cbcbbe38c340>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=8454a48a-558c-408f-bbfc-4f4b245d6ebc data-doc-title="Calling static .NET methods">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-dotnet-from-javascript/calling-static-dotnet-methods">Calling static .NET methods</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=89c5d7f2-83a1-40b6-a90f-c435c8f8c2ac data-doc-title="Lifetimes and memory leaks">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-dotnet-from-javascript/lifetimes-and-memory-leaks">Lifetimes and memory leaks</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=4217c451-263e-41b5-914b-66357b59bab5 data-doc-title="Type safety">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-dotnet-from-javascript/type-safety">Type safety</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=0e634915-b026-4feb-96ae-3b917a69a1e2 data-doc-title="Calling JavaScript from .NET">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-javascript-from-dotnet">Calling JavaScript from .NET</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=0e634915-b026-4feb-96ae-3b917a69a1e2>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=ea011d35-1d5b-4617-9d56-1153d18d3124 data-doc-title="Passing HTML element references">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-javascript-from-dotnet/passing-html-element-references">Passing HTML element references</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=98a44430-3c06-4143-8184-930afb4aa260 data-doc-title="Updating the document title">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-javascript-from-dotnet/updating-the-document-title">Updating the document title</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=bfda94df-d1ef-4654-8067-ea76ad0bd651 data-doc-title="JavaScript boot process">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/javascript-boot-process">JavaScript boot process</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=89f30b51-d5c4-4420-89ca-60f866e0d351 data-doc-title="Layouts">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/layouts">Layouts</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=89f30b51-d5c4-4420-89ca-60f866e0d351>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=d8b1c847-340e-42a1-b97b-400182d2898d data-doc-title="Creating a Blazor layout">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/layouts/creating-a-blazor-layout">Creating a Blazor layout</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=0ba6a786-62bc-47c2-83cc-494cb726c89c data-doc-title="Nested layouts">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/layouts/nested-layouts">Nested layouts</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=b986e0d3-50da-4a79-86c2-d46b6ecad427 data-doc-title="Using a layout">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/layouts/using-layouts">Using a layout</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=fa5483ec-fb39-4eef-a7cb-9a9bacdfda3a data-doc-title="Introduction">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/overview">Introduction</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=fa5483ec-fb39-4eef-a7cb-9a9bacdfda3a>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=c07a938a-6bc2-42fd-ba27-6f64bc3cbfb5 data-doc-title="Blazor hosting models">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/overview/blazor-hosting-models">Blazor hosting models</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=9e0443e9-76dc-4a61-b742-50a88508e69e data-doc-title="Creating a new project">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/overview/creating-a-new-project">Creating a new project</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=9f2e8b14-5463-4bba-941d-78f057c64bce data-doc-title="Creating a page">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/overview/creating-a-page">Creating a page</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=de315c3a-47da-4db0-8cf7-a1eb56fc9cbd data-doc-title="Installing Blazor">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/overview/installing-blazor">Installing Blazor</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=8a3f160f-2b3d-4470-89b0-9eacc42dddae data-doc-title="What is Blazor?">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/overview/what-is-blazor">What is Blazor?</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=f14e6605-ab2c-474f-bdf0-c4461e160a31 data-doc-title="What is WebAssembly?">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/overview/what-is-webassembly">What is WebAssembly?</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=b40f1ee8-1100-45b4-a5b6-46f5b4d08c79 data-doc-title="Routing">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/routing">Routing</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=b40f1ee8-1100-45b4-a5b6-46f5b4d08c79>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=f01ced73-fb5e-4534-a08d-2cd6ecfaba26 data-doc-title="404 - Not found">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/404-not-found">404 - Not found</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=917972d6-1178-4395-ac8b-8c6dbcc7a3c7 data-doc-title="Constraining route parameters">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/constraining-route-parameters">Constraining route parameters</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=df62f42f-7fa4-41a5-847e-67c13d319d0c data-doc-title="Defining routes">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/defining-routes">Defining routes</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=4dd41b77-3828-4a08-93bc-1fa1ef0d414a data-doc-title="Detecting navigation events">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/detecting-navigation-events">Detecting navigation events</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=259ca9fd-ecb4-42cd-be69-b47d7d6b743d data-doc-title="Navigating our app via code">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/navigating-our-app-via-code">Navigating our app via code</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=6bee09f1-5b4f-4d78-9366-fce4e7a1f464 data-doc-title="Navigating our app via HTML">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/navigating-our-app-via-html">Navigating our app via HTML</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=45c4bce5-2e42-42ce-8da0-4e21a3c56e79 data-doc-title="Optional route parameters">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/optional-route-parameters">Optional route parameters</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=5770bbd0-ddd9-4236-9e96-0ec54bbfb6f7 data-doc-title="Route parameters">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/route-parameters">Route parameters</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=b4f19001-e3b4-4ba4-8708-ebdb83fdcf7e data-doc-title="Templating components with RenderFragments">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/templating-components-with-renderfragements">Templating components with RenderFragments</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=b4f19001-e3b4-4ba4-8708-ebdb83fdcf7e>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=e0a9126c-3db1-4e31-9946-a1750329764b data-doc-title="Creating a TabControl">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/templating-components-with-renderfragements/creating-a-tabcontrol">Creating a TabControl</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=77817ab2-34d9-4375-9f96-e9d7b7a33502 data-doc-title="Passing data to a RenderFragment">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/templating-components-with-renderfragements/passing-data-to-a-renderfragement">Passing data to a RenderFragment</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=33edbb18-1f99-4ba9-8ccc-e3051758679f data-doc-title="Passing placeholders to RenderFragments">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item active">
+  <a href="/templating-components-with-renderfragements/passing-placeholders-to-renderfragments">Passing placeholders to RenderFragments</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=111aa7f6-feab-457f-8f36-028970f3b0f0 data-doc-title="Using @typeparam to create generic components">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/templating-components-with-renderfragements/using-typeparam-to-create-generic-components">Using @typeparam to create generic components</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+      </div>
+
+  </nav>
+</section>
+
+        <main
+          class="w-3/4 p-2 mx-auto prose max-w-none lg:p-10 bg-zinc-200 dark:bg-slate-800 dark:prose-invert "
+        >
+          <!-- _edit-in-github-link.cshtml -->
+
+<a class="flex flex-row justify-end gap-2 -mt-4 text-sm font-normal" href="https://github.com/TimeWarp-Enterprises/blazor-university/edit/main/input/pages/templating-components-with-renderfragements/passing-placeholders-to-renderfragments/index.md" target="_blank">
+  <span>
+    Edit This Page
+  </span>
+  <svg 
+  xmlns="http://www.w3.org/2000/svg" 
+  fill="none" 
+  viewBox="0 0 24 24" 
+  stroke-width="1.5" 
+  stroke="currentColor"
+  class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round"
+    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+</svg>
+
+</a>
+
+          <p><a href="https://github.com/mrpmorris/blazor-university/tree/master/src/TemplatedComponents/PassingPlaceholdersToRenderFragments"><img src="images/SourceLink-e1567978928628.png" alt="" /></a></p>
+<p><strong>Credit:</strong> This page was inspired by a Twitter post by the user <a href="https://twitter.com/mistermag00">ℳisterℳagoo</a>.</p>
+<p>At first, it might seem unintuitive, or perhaps a little odd, to think of declaring a <code>[Parameter]</code> property of type <code>RenderFragment&lt;RenderFragment&gt;</code>.</p>
+<p>[Parameter]
+public RenderFragment<RenderFragment> ChildContent { get; set; }</p>
+<p>The fact is, if you have ever created a <a href="/layouts/creating-a-blazor-layout">Custom Blazor layout</a> then you are already familiar with a similar concept.</p>
+<p>The <code>&lt;T&gt;</code> in <code>RenderFragment&lt;T&gt;</code> is passed into the user-specified mark-up as the <code>&#64;context</code> variable. A layout uses the name <code>&#64;Body</code> rather than <code>&#64;context</code>, but <code>&#64;Body</code> is actually a <code>RenderFragment</code>. To prove this point, edit the <strong>/Shared/MainLayout.razor</strong> file and change <code>&#64;Body</code> to the following.</p>
+<p>&#64;Body.GetType().Name</p>
+<p>Now instead of displaying the content rendered by <code>&#64;Body</code>, we will see the class name, which happens to be <code>RenderFragment</code>.</p>
+<p>Although this is not exactly how a Blazor layout works, it is a useful comparison for helping to understand the principle behind declaring a <code>[Parameter]</code> property of type <code>RenderFragment&lt;RenderFragment&gt;</code>.</p>
+<div class="our-main-layout">
+  &#64;Body
+</div>
+<p>In the preceding fictitious layout, we can imagine the entire mark-up as being the <strong>ChildContent</strong> <code>RenderFragment</code> of some parent component, and the <code>&#64;Body</code> on line 3 as the equivalent of a <code>&#64;context</code> (named <strong>Body</strong>) that is a <code>RenderFragment</code> that we can choose to inject anywhere we wish. In this case, we are choosing to inject the <strong>Body</strong> inside an HTML <code>&lt;div&gt;</code> element.</p>
+<p>The equivalent of our own would be either</p>
+<OurComponent>
+  <p>
+    &#64;context
+  </p>
+</OurComponent>
+<p>Or, if we want to use the name <strong>Body</strong> (or anything else) instead of <strong>context</strong>, we can specify the name to use for the context. See the <strong>Avoiding &#64;context name conflicts</strong> section at the bottom of <a href="/templating-components-with-renderfragements/passing-data-to-a-renderfragement">Passing data to a RenderFragment</a>.</p>
+<OurComponent Context="FragmentWeNeedToRender">
+  <div class="our-wrapped-fragment">
+    &#64;FragmentWeNeedToRender
+  </div>
+</OurComponent>
+<h2 id="creating-a-working-example">Creating a working example</h2>
+<p>First, create a class we can use to bind some data to.</p>
+<p>public class Person
+{
+public string Salutation { get; set; }
+public string GivenName { get; set; }
+public string FamilyName { get; set; }
+}</p>
+<h3 id="creating-a-simple-templated-repeating-component">Creating a simple templated repeating component</h3>
+<p>This detail is similar to that covered in the section <a href="/templating-components-with-renderfragements/using-typeparam-to-create-generic-components">Using &#64;typeparam to create generic components</a>. Here we'll quickly gloss over the shared content so, if you've not read that already, please read it first.</p>
+<p>Next, we need to create a new component in <strong>/Shared</strong> named <strong>DataList.razor</strong>. This component will be a generic component (using <code>&#64;typeparam</code>) and will take an <code>IEnumerable&lt;TItem&gt;</code> and iterate over the enumerable to render content per item using a template specified by its consumer.</p>
+<p>&#64;typeparam TItem</p>
+<ul>
+	&#64;foreach (TItem item in Data ?? Array.Empty<TItem>())
+	{
+		&#64;ItemTemplate(item)
+	}
+</ul>
+&#64;code
+{
+	[Parameter]
+	public IEnumerable<TItem> Data { get; set; }
+<pre><code>[Parameter]
+public RenderFragment&lt;TItem&gt; ItemTemplate { get; set; }
+</code></pre>
+<p>}</p>
+<p>This component may be consumed by our Index page like so:</p>
+<p>&#64;page &quot;/&quot;</p>
+<DataList Data=&#64;People>
+	<ItemTemplate>
+		<li &#64;key=context>&#64;context.Salutation &#64;context.GivenName &#64;context.FamilyName</li>
+	</ItemTemplate>
+</DataList>
+<p>&#64;code
+{
+private IEnumerable<Person> People;
+protected override void OnInitialized()
+{
+base.OnInitialized();
+People = new Person[]
+{
+new Person { Salutation = &quot;Mr&quot;, GivenName = &quot;Bob&quot;, FamilyName = &quot;Geldof&quot; },
+new Person { Salutation = &quot;Mrs&quot;, GivenName = &quot;Angela&quot;, FamilyName = &quot;Rippon&quot; },
+new Person { Salutation = &quot;Mr&quot;, GivenName = &quot;Freddie&quot;, FamilyName = &quot;Mercury&quot; }
+};
+}
+}</p>
+<p><strong>Note:</strong> The <code>&#64;key=context</code> in the <code>&lt;li&gt;</code> element is for performance purposes and should be used whenever rendering a list. See <a href="/components/render-trees/optimising-using-key">Optimising using &#64;key</a> for more information.</p>
+<h3 id="the-problem">The problem</h3>
+<p>What if our DataList component doesn't only output a list of items. Perhaps it has a footer that allows the user to show a page of elements at a time with Previous / Next buttons, and a footer showing how many items there are in total?</p>
+<p>We can simply add this additional mark-up to our <strong>DataList</strong> component, but what if the consumer of our component wants to also render the list differently? Perhaps they need to display the paged list as an HTML <code>&lt;table&gt;</code> in once place, and an HTML <code>&lt;ul&gt;</code> somewhere else?</p>
+<div class="paged-data-list">
+	<div class="paged-data-list\_header">
+		&#64;Data.Count() item(s)
+	</div>
+	<div class="paged-data-list\_body">
+		<!-- Consumer wants either a <table> or a <ul> here -->
+		&#64;foreach(TItem item in CurrentPageOfData)
+		{
+			&#64;ItemTemplate(item)
+		}
+		<!-- Consumer wants either a </table> or a </ul> here -->
+	</div>
+	<div class="paged-data-list\_footer">
+		<button type="button" etc>Prev</button>
+		<button type="button" etc>Next</button> 
+	</div>
+</div>
+<p>This is exactly the kind of use-case that requires us to have the user pass in a <code>RenderFragment&lt;RenderFragment&gt;</code>.</p>
+<h3 id="rendering-a-renderfragment-within-a-renderfragment">Rendering a RenderFragment within a RenderFragment</h3>
+<p>Now that we have our <code>ItemTemplate</code> that receives an <code>&#64;context</code> of type <code>Person</code> in order to render each element, we need to allow our component's consumer to specify what content to include before the first element and after the last element - as highlighted in the preceding code sample on lines 6 and 11.</p>
+<p>The consuming component would look something like either of the two following examples</p>
+<DataList Data=&#64;People>
+ 	<ItemTemplate Context="person">
+		<li &#64;key=person>
+			&#64;person.Salutation &#64;person.FamilyName, &#64;person.GivenName
+		</li>
+	</ItemTeplate>
+</DataList>
+<DataList Data=&#64;People>
+	<ListTemplate Context="allPeople">
+		<ul Type="A">
+			&#64;allPeople
+		</ul>
+	</ListTemplate>
+	<ItemTemplate Context="person">
+		<li &#64;key=person>
+			&#64;person.Salutation &#64;person.FamilyName, &#64;person.GivenName
+		</li>
+	</ItemTemplate>
+</DataList>
+<ul>
+<li><strong>Line 2</strong><br />
+Defines the template to use for the list. In this case, we wrap our inner content (our data items &quot;allPeople&quot;) with <code>&lt;ul&gt;</code> and <code>&lt;/ul&gt;</code>.</li>
+<li><strong>Line 4</strong><br />
+Indicates where to render the items mark-up by executing the <code>RenderFragment</code> passed via the context variable that we have chosen to refer to as &quot;allPeople&quot;.</li>
+<li><strong>Line 7</strong><br />
+Specifies a template for each item. In this case, the context will be an instance of <code>Person</code> and so we've chosen to refer to the context by the name &quot;person&quot; by specifying <code>Context=&quot;person&quot;</code>.</li>
+</ul>
+<h3 id="passing-rendered-content-as-a-placeholder-for-the-consumer-to-display">Passing rendered content as a placeholder for the consumer to display</h3>
+<p>The DataList component needs to render each item in the <code>Data</code> property, and then pass that to the consumer to decide where in its <code>ListTemplate</code> to render that output. Or, more accurately, the DataList needs to pass a <code>RenderFragment</code> that will render the mark-up for the items when executed.</p>
+<p>First, we'll add the <code>ListTemplate</code> property to our DataList component.</p>
+<p>[Parameter]
+public RenderFragment<RenderFragment> ListTemplate { get; set; }</p>
+<p>Next we'll change our DataList so that it uses <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code> as a default when no <code>ListTemplate</code> has been specified by the consumer, after that we'll deal with the scenario where the consumer does want to use a custom <code>ListTemplate</code>.</p>
+<h3 id="rendering-using-a-default-list-template">Rendering using a default list template</h3>
+<p>This is the easy part. All we need to do is to write our mark-up as if there were no such thing as a <code>ListTemplate</code> on the component, just as we normally would - but only if the <code>ListTemplate</code> property is null.</p>
+<p>&#64;typeparam TItem
+&#64;if (ListTemplate == null)
+{
+<ul>
+&#64;foreach (TItem item in Data ?? Array.Empty<TItem>())
+{
+&#64;ItemTemplate(item)
+}
+</ul>
+}</p>
+<p>&#64;code
+{
+[Parameter]
+public IEnumerable<TItem> Data { get; set; }</p>
+<pre><code>[Parameter]
+public RenderFragment&lt;TItem&gt; ItemTemplate { get; set; }
+
+[Parameter]
+public RenderFragment&lt;RenderFragment&gt; ListTemplate { get; set; }
+</code></pre>
+<p>}</p>
+<ul>
+<li><strong>Lines 2</strong><br />
+Checks if ListTemplate is null</li>
+<li><strong>Lines 4-9</strong><br />
+If ListTemplate is null then we render a standard <code>&lt;ul&gt;</code> list, and then render element in Data using the ItemTemplate.</li>
+</ul>
+<h3 id="rendering-with-a-custom-listtemplate">Rendering with a custom ListTemplate</h3>
+<p>The <code>RenderFragment&lt;TItem&gt;</code> expects us to pass an instance of <code>TItem</code> each time we render it. This is simple to do because we have an <code>IEnumerable&lt;TItem&gt;</code> from which we can pull values to be rendered, but what do we do when we need to pass an instance of <code>RenderFragment</code> to our template?</p>
+<p>To define a non-generic <code>RenderFragment</code> we can use the standard Razor escape sequence to denote HTML, which is <code>&#64;:</code></p>
+<p>RenderFragment rf = &#64;<h1>Hello</h1>;</p>
+<p>To define a <code>RenderFragment&lt;T&gt;</code> we need to use a lambda that passes in an instance of <code>T</code></p>
+<p>RenderFragment<Person> rf =
+person =&gt; &#64;<h1>Hello &#64;person.Name</h1>;</p>
+<p>So how would we return a RenderFragment that will loop over the items in our <code>Data</code> property only when it is rendered? For that, we need to use the wig-pig syntax.</p>
+<h4 id="the-wig-pig">The wig-pig</h4>
+<p><img src="images/WigPig.png" alt="" /></p>
+<p>The wig-pig is a set of characters that the Razor rendering engine can use to denote a chunk of Razor mark-up within C# files. For obvious reasons, this character sequence only works in <code>.razor</code> files. Any visual likeness to any person, either living or dead, is purely coincidental.</p>
+<p><strong>Note:</strong> <code>&#64;:&#64;{</code> is in fact two character sequences. First <code>&#64;:</code> tells the Razor parser to treat the following text as Razor mark-up, and then <code>&#64;{</code> is the start of a C# code block - which will obviously end somewhere with a complementary <code>}</code>. Ultimately this gives us a chunk of Razor mark-up, which is equivalent to a <code>RenderFragment</code> with C# code inside it that can perform operations such as loops.</p>
+<p>When calling <code>&#64;ListItem(...)</code> in our Razor file we can pass an in-place <code>RenderFragment</code> as the parameter using the wig-pig syntax.</p>
+<p>&#64;ListTemplate(
+&#64;:&#64;{
+foreach (TItem item in Data ?? Array.Empty<TItem>())
+{
+&#64;item.ToString()
+}
+}
+)</p>
+<p>Using this syntax, we render the mark-up specified by the consumer in <code>&lt;ListTemplate&gt;</code> passing in a <code>RenderFragment</code> that will render all of the elements in <code>Data</code>. In the preceding code it simply calls <code>ToString()</code> on each item in <code>Data</code>. However, ideally we would like to use the <code>ItemTemplate</code> the consumer has provided for us.</p>
+<p>&#64;ListTemplate(
+&#64;:&#64;{
+foreach (TItem item in Data ?? Array.Empty<TItem>())
+{
+&#64;ItemTemplate(item)
+}
+}
+)</p>
+<h3 id="datalist.razor">DataList.razor</h3>
+<p>&#64;typeparam TItem
+&#64;if (ListTemplate == null)
+{
+<ul>
+&#64;foreach (TItem item in Data ?? Array.Empty<TItem>())
+{
+&#64;ItemTemplate(item)
+}
+</ul>
+}
+else
+{
+&#64;ListTemplate(
+&#64;:&#64;{
+foreach (TItem item in Data ?? Array.Empty<TItem>())
+{
+&#64;ItemTemplate(item)
+}
+}
+)
+}</p>
+<p>&#64;code
+{
+[Parameter]
+public IEnumerable<TItem> Data { get; set; }</p>
+<pre><code>[Parameter]
+public RenderFragment&lt;TItem&gt; ItemTemplate { get; set; }
+
+[Parameter]
+public RenderFragment&lt;RenderFragment&gt; ListTemplate { get; set; }
+</code></pre>
+<p>}</p>
+<h2 id="consuming-our-datalist">Consuming our DataList</h2>
+<h3 id="sample-1-a-simple-list">Sample 1: A simple list</h3>
+<DataList Data=&#64;People>
+	<ItemTemplate>
+		<li &#64;key=context>&#64;context.Salutation &#64;context.GivenName &#64;context.FamilyName</li>
+	</ItemTemplate>
+</DataList>
+<p>Generates the following</p>
+<ul>
+		<li>Mr Bob Geldof</li>
+		<li>Mrs Angela Rippon</li>
+		<li>Mr Freddie Mercury</li>
+</ul>
+<p><img src="images/RenderFragmentList.png" alt="" /></p>
+<p>Rendered HTML</p>
+<h3 id="sample-2-an-html-table">Sample 2: An HTML table</h3>
+<DataList Data=&#64;People>
+	<ListTemplate Context="listOfPeople">
+		<table border=1 cellpadding=4>
+			<thead>
+				<tr>
+					<th>Salutation</th>
+					<th>Given name</th>
+					<th>Family name</th>
+				</tr>
+			</thead>
+			<tbody>
+				&#64;listOfPeople
+			</tbody>
+		</table>
+	</ListTemplate>
+	<ItemTemplate Context="person">
+		<tr &#64;key=&#64;person>
+			<td>&#64;person.Salutation</td>
+			<td>&#64;person.GivenName</td>
+			<td>&#64;person.FamilyName</td>
+		</tr>
+	</ItemTemplate>
+</DataList>
+<p>Generates the following</p>
+<table cellpadding="4" border="1">
+	<thead>
+		<tr>
+			<th>Salutation</th>
+			<th>Given name</th>
+			<th>Family name</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Mr</td>
+			<td>Bob</td>
+			<td>Geldof</td>
+		</tr>
+		<tr>
+			<td>Mrs</td>
+			<td>Angela</td>
+			<td>Rippon</td>
+		</tr>
+		<tr>
+			<td>Mr</td>
+			<td>Freddie</td>
+			<td>Mercury</td>
+		</tr>
+	</tbody>
+</table>
+<p><img src="images/RenderFragmentTable.png" alt="" /></p>
+<p>Rendered HTML</p>
+<h3 id="assigning-defaults-when-renderfragments-are-not-specified">Assigning defaults when RenderFragments are not specified</h3>
+<p>At the moment we are having to check if <code>ListTemplate</code> is null using an <code>&#64;if</code> statement in our view, and we aren't even checking if <code>ItemTemplate</code> is set or not. Neither of these approaches are ideal.</p>
+<p>Instead, we should set our <code>RenderFragment</code> properties to a desired default if they have not been set by the consumer. This way our component's render logic can be kept much simpler.</p>
+<p>&#64;ListTemplate(
+&#64;:&#64;{
+foreach(TItem item in CurrentPage)
+{
+&#64;ItemTemplate(item)
+}
+}
+)</p>
+<p>Override <code>OnParametersSet()</code> in our component and ensure the <code>ItemTemplate</code> property is not null. To do this, we create a lambda that receives a <code>TItem</code> and returns a <code>RenderFragment</code> (using the wig-pig syntax).</p>
+<p>protected override void OnParametersSet()
+{
+if (ItemTemplate == null)
+{
+ItemTemplate = (item) =&gt; &#64;:&#64;{
+&lt;li &#64;key=item&gt;&#64;item.ToString()</li>}
+;
+}
+}</p>
+<p>To ensure the <code>ListTemplate</code> is not null we create a lamba that receives a <code>RenderFragment</code> and then ignores it and returns our custom wig-pig <code>RenderFragment</code> instead.</p>
+<pre><code>  if (ListTemplate == null)
+  {
+	  ListTemplate = \_ =&gt; &#64;:&#64;{ 
+		&lt;ul&gt;
+			&#64;foreach(TItem item in CurrentPage)
+			{
+				&#64;ItemTemplate(item)
+			}
+		&lt;/ul&gt;
+		}
+	;
+  }
+</code></pre>
+<p><strong>Note</strong>: The <code>;</code> cannot be on the same line as the preceding <code>}</code>, otherwise the Razor parser does not parse the source correctly. This has been <a href="https://github.com/dotnet/aspnetcore/issues/20971">reported as a bug</a> and will hopefully be fixed in the near future.</p>
+<h2 id="summary">Summary</h2>
+<p>The <code>RenderFragment&lt;RenderFragment&gt;</code> technique should be used when the consumer wishes to identify a place-holder in their mark-up for content that will be passed to them during render - such as the <code>Body</code> placeholder in a Blazor Layout.</p>
+<p>Hopefully, this section has helped you to understand when to use this technique, and how to use the wig-pig <code>&#64;:&#64;{</code> syntax to generate in-place <code>RenderFragments</code>.</p>
+<h2 id="additional-reading">Additional reading</h2>
+<p>The source code for this section includes an additional <a href="https://github.com/mrpmorris/blazor-university/blob/master/src/TemplatedComponents/PassingPlaceholdersToRenderFragments/Pages/Paged.razor">sample page</a> that consumes a <a href="https://github.com/mrpmorris/blazor-university/blob/master/src/TemplatedComponents/PassingPlaceholdersToRenderFragments/Shared/PagedDataList.razor">PagedDataList</a> component.</p>
+
+        </main>
+      </div>
+      <!-- Main Footer -->
+    </div>
+    <!-- _scripts.cshtml -->
+<script src="/js/prism.js"></script>
+<script src="/js/tree.js"></script>
+
+  </div>
+</body>
+</html>

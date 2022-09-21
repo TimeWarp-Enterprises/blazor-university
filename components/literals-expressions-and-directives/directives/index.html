@@ -1,0 +1,116 @@
+<p>Directives are built-in macros that alter the transpiled C# code that is generated from Razor mark-up. Directives are used by preceding the identifier with the <code>&#64;</code> symbol, the identifier being what we'd typically expect to be either the name of an HTML attribute or the name of a component's property. If you haven't done so already, read <a href="/components/literals-expressions-and-directives">Literals, expressions, and directives</a>.</p>
+<p><strong>Note:</strong> Currently, unlike other frameworks such as Angular, Blazor does not allow developers to create their own directives.</p>
+<p>Because the type of the value assigned to the directive is known (it is strongly typed in C# code) the value will be inferred to be an expression. So, as with component properties, adding the <code>&#64;</code> at the start of assigned value is unnecessary unless we wish to pass an expression to a directive that expects a string value. An exception to this is when we wish to pass a lambda; lambdas must be escaped with an <code>&#64;</code> symbol and enclosed with brackets.</p>
+<p>&#64;onclick=&#64;( args =&gt; Debug.WriteLine(&quot;Clicked&quot;) )</p>
+<p>The following code shows how the <code>&#64;onclick</code> directive is used to add the DOM onclick event to a rendered H1 element.</p>
+<p>// Razor mark-up with &#64;ref directive</p>
+<h1 &#64;onclick=H1Clicked>Hello, world!</h1>
+<p>&#64;code
+{
+public void H1Clicked(MouseEventArgs args)
+{
+System.Diagnostics.Debug.WriteLine(&quot;H1 clicked&quot;);
+}
+}</p>
+<p>// Transpiled C#
+public partial class Index : Microsoft.AspNetCore.Components.ComponentBase
+{
+protected override void BuildRenderTree(RenderTreeBuilder __builder)
+{
+__builder.OpenElement(0, &quot;h1&quot;);
+__builder.AddAttribute(1, &quot;onclick&quot;, EventCallback.Factory.Create&lt;Microsoft.AspNetCore.Components.Web.MouseEventArgs&gt;(this, H1Clicked));
+__builder.AddContent(2, &quot;Hello, world!&quot;);
+__builder.CloseElement();
+}
+}</p>
+<ul>
+<li><strong>Line 2</strong><br />
+Defines an H1 element with the <code>&#64;onclick</code> directive.</li>
+<li><strong>Line 18</strong><br />
+Shows how the <code>&#64;onclick=H1Clicked</code> directive is transpiled so that the DOM <code>onclick</code> event is set on the rendered element.</li>
+</ul>
+<p>Some standard directives applicable to the Razor file itself are:</p>
+<ul>
+<li><code>&#64;code</code><br />
+This directive identifies a block of C# code that should be output as-is into the resulting C# file. It is possible to have multiple <code>&#64;code</code> directives in a single Razor mark-up file; Blazor will collate these to a single block of C# code in the transpiled file.</li>
+<li><code>&#64;page</code><br />
+This directive generates a <code>[RouteAttribute]</code> on the transpiled class (<code>[PageAttribute]</code> in Blazor 3) , enabling <a href="/routing">Blazor routing</a> (covered later) to identify which component (page) to render given a specific address in the URL.</li>
+<li><code>&#64;layout</code><br />
+Generates a <code>[LayoutAttribute]</code> on the transpiled class. Blazor uses this to determine which <a href="/layouts">Layout</a> to use (if any) to wrap the contents of a page.</li>
+<li><code>&#64;typeparam</code><br />
+Instructs Blazor to generate a generic class from the Razor mark-up.</li>
+<li><code>&#64;inject</code><br />
+Allows components to specify dependencies they require to be injected by Blazor when it creates a new instance of the component.</li>
+<li><code>&#64;attribute</code><br />
+Adds the specified DotNet attribute to the generated C# class.</li>
+</ul>
+<p>The following is a small set of examples of directives that can be applied to components and HTML elements that the current Razor file is consuming. For example <code>&lt;h1 &#64;ref=MyH1Element&gt;Hello&lt;/h1&gt;</code>.</p>
+<ul>
+<li><code>&#64;ref</code><br />
+Identifies a member or property of the current component that should hold a reference to an HTML element or component that will be rendered. These can be used as references when using <a href="/javascript-interop/calling-javascript-from-dotnet/passing-html-element-references">JavaScript Interop</a>, or to obtain a reference to an embedded Blazor component so that we can invoke methods on it.</li>
+<li><code>&#64;bind</code><br />
+Allows us to data bind (<a href="/javascript-interop/calling-javascript-from-dotnet/passing-html-element-references">Two way binding</a>) to the property of a component being consumed, or the attribute of an HTML element.</li>
+<li><code>&#64;attributes</code><br />
+<a href="/components/code-generated-html-attributes">Outputs name-value pairs</a> as HTML attributes.</li>
+<li><code>&#64;key</code><br />
+Gives us the ability to give elements/components a unique identifier, which helps keep change deltas small when <a href="/components/render-trees">rendering</a> to HTML.</li>
+</ul>
+<p>And the following is a subset of HTML DOM element events that are available. These will be convered in more detail in <a href="/components/component-events">Component events</a>.</p>
+<ul>
+<li><code>&#64;onmousemove</code></li>
+<li><code>&#64;onclick</code></li>
+<li><code>&#64;onkeypress</code></li>
+<li><code>&#64;onscroll</code></li>
+</ul>
+<h2 id="directive-attributes">Directive attributes</h2>
+<p><a href="https://github.com/mrpmorris/blazor-university/tree/master/src/Components/DirectiveAttributes"><img src="images/SourceLink-e1567978928628.png" alt="" /></a></p>
+<p>Directive attributes allow us to pass additional information to directives. If we think of a directive as a class, then directive attributes are its members.</p>
+<p>To pass this additional information we need to repeat the directive, and then append a <code>:</code> followed by the name of the attribute that the directive supports.</p>
+<p>For example, by default our browser will propagate an element's events up the tree until it finally reaches the HTML document itself. A plain HTML + JavaScript demonstration of this would be to output text to the console when an element is clicked.</p>
+<html>
+	<body>
+		<div onclick="console.log('Top level clicked')">
+			<h1>Top level</h1>
+			<div onclick="console.log('Second level clicked')">
+				<h2>Second level</h2>
+				<div onclick="console.log('Third level clicked')">
+					<h3>Third level</h3>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<p>Because the <code>div</code> elements are nested, when one of them is clicked that event will trigger not only the <code>onclick</code> code on the <code>div</code> itself, but it will also trigger the <code>onclick</code> on its parent <code>div</code>, which in turn will trigger then event on its own parent <code>div</code> - and so on, until the current element has no parent.</p>
+<p><img src="images/PropagatedClick.png" alt="" /></p>
+<p>Console output when the Third level header is clicked</p>
+<p>To prevent an event propagating up the element tree JavaScript has a <a href="https://www.w3schools.com/jsref/event_stoppropagation.asp">stopPropagation method</a> on the event. Blazor prevents propagation using a directive attribute - <code>&#64;onclick:stopPropagation</code>.</p>
+<p>&#64;page &quot;/&quot;
+&#64;using System.Diagnostics</p>
+<div &#64;onclick=TopLevelClicked>
+	<h1>Top level</h1>
+	<div &#64;onclick=SecondLevelClicked &#64;onclick:stopPropagation>
+		<h2>Second level</h2>
+		<div &#64;onclick=ThirdLevelClicked>
+			<h3>Third level</h3>
+		</div>
+	</div>
+</div>
+<p>&#64;code
+{
+private void TopLevelClicked()
+{
+Debug.WriteLine(&quot;Top level clicked&quot;);
+}</p>
+<pre><code>private void SecondLevelClicked()
+{
+	Debug.WriteLine(&quot;Second level clicked&quot;);
+}
+
+private void ThirdLevelClicked()
+{
+	Debug.WriteLine(&quot;Third level clicked&quot;);
+}
+</code></pre>
+<p>}</p>
+<p>Lines 4, 6, and 8 all define the <code>&#64;onclick</code> attribute and declare which C# method to execute when the Browser <code>onclick</code> event is triggerred. Line 6 adds an additional <code>&#64;onclick:stopPropagation</code> to prevent the browser propagating the click up from the second to the first level. More DOM events will be covered in the section about DOM events.</p>
+<p>Some directive attributes expect us to specify a value in the form <code>&#64;directive:attribute=&quot;value&quot;</code>. We'll cover this in detail in the section on <a href="/components/two-way-binding">Two-way binding</a>.</p>

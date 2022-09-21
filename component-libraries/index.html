@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<!-- _layout.cshtml -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!-- _head.cshtml -->
+<head>
+  <title>Blazor University - Component libraries</title>
+  <!-- _meta-tags.cshtml -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta charset="UTF-8">
+<meta name="title" content="Blazor University - Component libraries">
+<meta name="description">
+
+<!-- Open Graph / Facebook / Twitter -->
+<meta property="og:site_name" content="Blazor University">
+<meta property="og:url" content="/component-libraries">
+<meta property="og:title" content="Blazor University - Component libraries">
+<meta property="og:description">
+
+  <!-- _links.cshtml -->
+
+<link rel="canonical" href="/component-libraries">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link href="/css/Site.css" rel="stylesheet" type="text/css">
+<!-- using prism for syntax highlighting -->
+<link rel="stylesheet" title="highlight_light" href="/css/prism-light.css" disabled="disabled">
+<link rel="stylesheet" title="highlight_dark" href="/css/prism-dark.css" disabled="disabled">
+
+</head>
+
+<body class="flex flex-col min-h-screen bg-zinc-200 dark:bg-slate-800 text-zinc-800 dark:text-zinc-100">
+  <div className="fixed inset-0 flex justify-center sm:px-8">
+    <div className="flex w-full max-w-7xl lg:px-8">
+      <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20"></div>
+    </div>
+  </div>
+  <div class="flex flex-col flex-grow mx-auto lg:max-w-6xl ">
+    <!-- _header.cshtml -->
+<header class="mx-auto">
+  <img class="px-10 mx-auto" src="/images/blazor-university-circle.png" />
+  <!-- _search.cshtml -->
+<button
+  type="button"
+  className="group flex h-6 w-6 items-center justify-center sm:justify-start md:h-auto md:w-80 md:flex-none md:rounded-lg md:py-2.5 md:pl-4 md:pr-3.5 md:text-sm md:ring-1 md:ring-slate-200 md:hover:ring-slate-300 dark:md:bg-slate-800/75 dark:md:ring-inset dark:md:ring-white/5 dark:md:hover:bg-slate-700/40 dark:md:hover:ring-slate-500 lg:w-96"
+  onClick={onOpen}
+>
+  <svg
+    aria-hidden="true"
+    className="h-5 w-5 flex-none fill-slate-400 group-hover:fill-slate-500 dark:fill-slate-500 md:group-hover:fill-slate-400"
+  >
+    <path d="M16.293 17.707a1 1 0 0 0 1.414-1.414l-1.414 1.414ZM9 14a5 5 0 0 1-5-5H2a7 7 0 0 0 7 7v-2ZM4 9a5 5 0 0 1 5-5V2a7 7 0 0 0-7 7h2Zm5-5a5 5 0 0 1 5 5h2a7 7 0 0 0-7-7v2Zm8.707 12.293-3.757-3.757-1.414 1.414 3.757 3.757 1.414-1.414ZM14 9a4.98 4.98 0 0 1-1.464 3.536l1.414 1.414A6.98 6.98 0 0 0 16 9h-2Zm-1.464 3.536A4.98 4.98 0 0 1 9 14v2a6.98 6.98 0 0 0 4.95-2.05l-1.414-1.414Z" />
+  </svg>
+
+
+  <span className="sr-only md:not-sr-only md:ml-2 md:text-slate-500 md:dark:text-slate-400">
+    Search docs
+  </span>
+  <kbd className="ml-auto hidden font-medium text-slate-400 dark:text-slate-500 md:block">
+    <kbd className="font-sans">⌘</kbd>
+    <kbd className="font-sans">Ctrl</kbd>
+    <kbd className="font-sans">K</kbd>
+  </kbd>
+</button>
+
+  <!-- _navigation.cshtml-->
+
+</header>
+
+    <!-- Main  -->
+    <div class="flex flex-col flex-grow w-full mx-auto mt-2">
+      <!-- _main-header.cshtml -->
+<header class="w-full px-4 mx-auto">
+  <!-- _announcement.cshtml -->
+
+<div id="page-banner">
+  <div id="page-banner_header">Join me for live Blazor coding!</div>
+  <div id="page-banner_body">
+    <a href="https://www.twitch.tv/mrpeterlmorris/schedule?seriesID=2a667d82-38aa-4aac-9909-b0e7682236a8">Wednesday at 6pm (UK Time) on Twitch.Tv</a>
+  </div>
+</div>
+
+  <h1
+    class="text-4xl font-bold tracking-tight text-center sm:text-5xl"
+  >
+    Component libraries
+  </h1>
+  <div class="invisible mt-4 text-sm text-center text-blue-500 uppercase">
+    Wednesday, September 21, 2022
+  </div>
+  <!--image-->
+</header>
+
+      <div class="flex flex-row">
+        <!-- _sidebar.cshtml -->
+
+<section id="left-sidebar">
+  <nav class="content-menu">
+    <!-- _tree.cshtml -->
+      <div class="hidden menu-group overflow-hidden" data-group-id=f8caf663-c33e-418d-9683-5c8bd6bcb8e3>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=e9eaac19-52a7-474a-a585-7aaf61a44fde data-doc-title="Component libraries">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item active">
+  <a href="/component-libraries">Component libraries</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=1b6e3220-b119-41c5-ac1e-436f5ec3bd93 data-doc-title="Components">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components">Components</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=1b6e3220-b119-41c5-ac1e-436f5ec3bd93>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=924fa308-b2aa-42c0-858f-2555dd599d98 data-doc-title="Capturing unexpected parameters">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/capturing-unexpected-parameters">Capturing unexpected parameters</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=78d4ab91-dca5-4afc-9515-65c914b4faca data-doc-title="Cascading values">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components/cascading-values">Cascading values</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=78d4ab91-dca5-4afc-9515-65c914b4faca>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=cf68fe4a-b3b2-4190-9ec9-0064bbab079c data-doc-title="Cascading values by name">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/cascading-values/cascading-values-by-name">Cascading values by name</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=5ae5b9e9-875d-4779-b7f9-bb25402fbf6f data-doc-title="Cascading values by type">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/cascading-values/cascading-values-by-type">Cascading values by type</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=b80338fe-018a-425b-b802-5a0ea5e4da24 data-doc-title="Overriding cascaded values">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/cascading-values/overriding-cascaded-values">Overriding cascaded values</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=4d5e957d-aa92-4fa2-a428-d1583b331a80 data-doc-title="Code generated HTML attributes">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/code-generated-html-attributes">Code generated HTML attributes</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=34e0f5b5-e26b-4d8d-b5b6-887bcc2d1caf data-doc-title="Component events">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components/component-events">Component events</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=34e0f5b5-e26b-4d8d-b5b6-887bcc2d1caf>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=f4446c6d-54fb-4546-9a70-3bed6d89c0e1 data-doc-title="Browser DOM events">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/component-events/browser-dom-events">Browser DOM events</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=f7add840-07a0-4c19-b4be-0c4b7e5d68b2 data-doc-title="Component lifecycles">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/component-lifecycles">Component lifecycles</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=541403c7-eef7-4966-91c4-55ca8a541247 data-doc-title="Creating a component">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/creating-a-component">Creating a component</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=9a47eb4d-fd52-4afb-96f9-bba10171f7e2 data-doc-title="Literals, expressions, and directives">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components/literals-expressions-and-directives">Literals, expressions, and directives</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=9a47eb4d-fd52-4afb-96f9-bba10171f7e2>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=b0e814a8-45e0-4471-a1c0-03936058f393 data-doc-title="Directives">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/literals-expressions-and-directives/directives">Directives</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=dfbe4c0a-6f7b-487a-9b6f-4b2975adad69 data-doc-title="Multi-threaded rendering">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components/multi-threaded-rendering">Multi-threaded rendering</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=dfbe4c0a-6f7b-487a-9b6f-4b2975adad69>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=11d2db42-aa6e-428f-84aa-c00c22104294 data-doc-title="Thread safety using InvokeAsync">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/multi-threaded-rendering/invokeasync">Thread safety using InvokeAsync</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=5477b9cb-6be6-4235-9b25-23e5a234b395 data-doc-title="One-way binding">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/one-way-binding">One-way binding</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=6cc9b596-ca94-4b8a-8872-07c49eaad4d0 data-doc-title="Render trees">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components/render-trees">Render trees</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=6cc9b596-ca94-4b8a-8872-07c49eaad4d0>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=0cd41df8-7fc0-45f0-8043-f162790ed71a data-doc-title="Incremental RenderTree proof">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/render-trees/incremental-rendertree-proof">Incremental RenderTree proof</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=f0ca38b7-64e7-4b8b-bca1-01dd0581616c data-doc-title="Optimising using @key">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/render-trees/optimising-using-key">Optimising using @key</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=7f9d1f89-1831-4198-aa4a-34bfc5e5a166 data-doc-title="Replacing attributes on child components">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/replacing-attributes-on-child-components">Replacing attributes on child components</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=a7ac98b1-93e1-4357-9d30-73d19626fe28 data-doc-title="Two-way binding">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/components/two-way-binding">Two-way binding</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=a7ac98b1-93e1-4357-9d30-73d19626fe28>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=c433163f-6574-4b6e-be08-ae95b3cc021a data-doc-title="Binding directives">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/components/two-way-binding/binding-directives">Binding directives</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=7d75cb5c-7120-482e-9e8e-e419ae70bb91 data-doc-title="Dependency injection">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection">Dependency injection</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=7d75cb5c-7120-482e-9e8e-e419ae70bb91>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=9df72fc4-2913-46e1-88bf-2ea9a1031f88 data-doc-title="Component scoped dependencies">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/component-scoped-dependencies">Component scoped dependencies</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=9df72fc4-2913-46e1-88bf-2ea9a1031f88>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=bcd7803f-4fe3-4f3c-bf82-aaf45c49fcf3 data-doc-title="Owning multiple dependencies: The right way">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/component-scoped-dependencies/owning-multiple-dependencies-the-right-way">Owning multiple dependencies: The right way</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=8d426a01-e3f9-46e5-919c-959241c55fa0 data-doc-title="Owning multiple dependencies: The wrong way">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/component-scoped-dependencies/owning-multiple-dependencies-the-wrong-way">Owning multiple dependencies: The wrong way</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=4799b425-83d5-44b4-a738-81a167776998 data-doc-title="OwningComponentBase&amp;lt;T&amp;gt;">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/component-scoped-dependencies/owningcomponentbase-generic">OwningComponentBase&amp;lt;T&amp;gt;</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=3afb44da-3ad4-4588-bdeb-635d5eac0481 data-doc-title="Dependency lifetimes and scopes">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/dependency-lifetimes-and-scopes">Dependency lifetimes and scopes</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=3afb44da-3ad4-4588-bdeb-635d5eac0481>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=1663f74f-12a6-4bc9-a5a9-196a003042cc data-doc-title="Comparing dependency scopes">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/dependency-lifetimes-and-scopes/comparing-dependency-scopes">Comparing dependency scopes</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=540aad57-07ed-4a01-a23c-412f0c03d47b data-doc-title="Scoped dependencies">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/dependency-lifetimes-and-scopes/scoped-dependencies">Scoped dependencies</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=76a901f3-8a93-4724-8bc8-adae4add56ff data-doc-title="Singleton dependencies">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/dependency-lifetimes-and-scopes/singleton-dependencies">Singleton dependencies</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=7d51c9a8-a25e-475d-99e9-cd2ead537722 data-doc-title="Transient dependencies">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/dependency-lifetimes-and-scopes/transient-dependencies">Transient dependencies</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=6f0ac6bc-bcc0-4e9a-9fbe-8c3478f1979a data-doc-title="Injecting dependencies into Blazor components">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/dependency-injection/injecting-dependencies-into-blazor-components">Injecting dependencies into Blazor components</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=9da41a98-39a2-4e57-a2d6-9a347697cbac data-doc-title="Forms">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/forms">Forms</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=9da41a98-39a2-4e57-a2d6-9a347697cbac>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=dac19bfa-de5e-4f60-a951-0cb702757b61 data-doc-title="Accessing form state">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/accessing-form-state">Accessing form state</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=9adf46ad-cc97-4133-bd0d-7e1cdf8fcb5d data-doc-title="Descending from InputBase&amp;lt;T&amp;gt;">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/descending-from-inputbase">Descending from InputBase&amp;lt;T&amp;gt;</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=553e91ce-8a39-4afb-92a6-57bc3814a841 data-doc-title="EditContext, FieldIdentifiers, and FieldState">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/editcontext-fieldidentifiers-and-fieldstate">EditContext, FieldIdentifiers, and FieldState</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=a529292a-8882-4ede-bda5-152d966085f4 data-doc-title="Editing form data">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/editing-form-data">Editing form data</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=6a16e1e6-95ea-4350-850b-3c4ad17cb93c data-doc-title="Handling form submission">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/handling-form-submission">Handling form submission</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=42d104e0-819e-46e1-bbf8-e1e813d532ef data-doc-title="Validation">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/validation">Validation</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=d018e895-2d73-4fad-b5c9-6f8b1b9aaa6e data-doc-title="Writing custom validation">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/forms/writing-custom-validation">Writing custom validation</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=67215d6e-8d60-4a85-bb3b-5a936840afda data-doc-title="JavaScript interop">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop">JavaScript interop</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=67215d6e-8d60-4a85-bb3b-5a936840afda>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=df73c75e-33f5-4043-9994-cbcbbe38c340 data-doc-title="Calling .NET From JavaScript">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-dotnet-from-javascript">Calling .NET From JavaScript</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=df73c75e-33f5-4043-9994-cbcbbe38c340>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=8454a48a-558c-408f-bbfc-4f4b245d6ebc data-doc-title="Calling static .NET methods">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-dotnet-from-javascript/calling-static-dotnet-methods">Calling static .NET methods</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=89c5d7f2-83a1-40b6-a90f-c435c8f8c2ac data-doc-title="Lifetimes and memory leaks">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-dotnet-from-javascript/lifetimes-and-memory-leaks">Lifetimes and memory leaks</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=4217c451-263e-41b5-914b-66357b59bab5 data-doc-title="Type safety">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-dotnet-from-javascript/type-safety">Type safety</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=0e634915-b026-4feb-96ae-3b917a69a1e2 data-doc-title="Calling JavaScript from .NET">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-javascript-from-dotnet">Calling JavaScript from .NET</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=0e634915-b026-4feb-96ae-3b917a69a1e2>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=ea011d35-1d5b-4617-9d56-1153d18d3124 data-doc-title="Passing HTML element references">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-javascript-from-dotnet/passing-html-element-references">Passing HTML element references</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=98a44430-3c06-4143-8184-930afb4aa260 data-doc-title="Updating the document title">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/calling-javascript-from-dotnet/updating-the-document-title">Updating the document title</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=bfda94df-d1ef-4654-8067-ea76ad0bd651 data-doc-title="JavaScript boot process">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/javascript-interop/javascript-boot-process">JavaScript boot process</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=89f30b51-d5c4-4420-89ca-60f866e0d351 data-doc-title="Layouts">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/layouts">Layouts</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=89f30b51-d5c4-4420-89ca-60f866e0d351>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=d8b1c847-340e-42a1-b97b-400182d2898d data-doc-title="Creating a Blazor layout">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/layouts/creating-a-blazor-layout">Creating a Blazor layout</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=0ba6a786-62bc-47c2-83cc-494cb726c89c data-doc-title="Nested layouts">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/layouts/nested-layouts">Nested layouts</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=b986e0d3-50da-4a79-86c2-d46b6ecad427 data-doc-title="Using a layout">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/layouts/using-layouts">Using a layout</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=fa5483ec-fb39-4eef-a7cb-9a9bacdfda3a data-doc-title="Introduction">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/overview">Introduction</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=fa5483ec-fb39-4eef-a7cb-9a9bacdfda3a>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=c07a938a-6bc2-42fd-ba27-6f64bc3cbfb5 data-doc-title="Blazor hosting models">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/overview/blazor-hosting-models">Blazor hosting models</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=9e0443e9-76dc-4a61-b742-50a88508e69e data-doc-title="Creating a new project">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/overview/creating-a-new-project">Creating a new project</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=9f2e8b14-5463-4bba-941d-78f057c64bce data-doc-title="Creating a page">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/overview/creating-a-page">Creating a page</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=de315c3a-47da-4db0-8cf7-a1eb56fc9cbd data-doc-title="Installing Blazor">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/overview/installing-blazor">Installing Blazor</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=8a3f160f-2b3d-4470-89b0-9eacc42dddae data-doc-title="What is Blazor?">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/overview/what-is-blazor">What is Blazor?</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=f14e6605-ab2c-474f-bdf0-c4461e160a31 data-doc-title="What is WebAssembly?">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/overview/what-is-webassembly">What is WebAssembly?</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=b40f1ee8-1100-45b4-a5b6-46f5b4d08c79 data-doc-title="Routing">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/routing">Routing</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=b40f1ee8-1100-45b4-a5b6-46f5b4d08c79>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=f01ced73-fb5e-4534-a08d-2cd6ecfaba26 data-doc-title="404 - Not found">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/404-not-found">404 - Not found</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=917972d6-1178-4395-ac8b-8c6dbcc7a3c7 data-doc-title="Constraining route parameters">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/constraining-route-parameters">Constraining route parameters</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=df62f42f-7fa4-41a5-847e-67c13d319d0c data-doc-title="Defining routes">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/defining-routes">Defining routes</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=4dd41b77-3828-4a08-93bc-1fa1ef0d414a data-doc-title="Detecting navigation events">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/detecting-navigation-events">Detecting navigation events</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=259ca9fd-ecb4-42cd-be69-b47d7d6b743d data-doc-title="Navigating our app via code">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/navigating-our-app-via-code">Navigating our app via code</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=6bee09f1-5b4f-4d78-9366-fce4e7a1f464 data-doc-title="Navigating our app via HTML">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/navigating-our-app-via-html">Navigating our app via HTML</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=45c4bce5-2e42-42ce-8da0-4e21a3c56e79 data-doc-title="Optional route parameters">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/optional-route-parameters">Optional route parameters</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=5770bbd0-ddd9-4236-9e96-0ec54bbfb6f7 data-doc-title="Route parameters">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/routing/route-parameters">Route parameters</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 pb-2 text-base flex items-start cursor-pointer" data-doc-id=b4f19001-e3b4-4ba4-8708-ebdb83fdcf7e data-doc-title="Templating components with RenderFragments">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+  <div class="mt-1 mr-2 menu-arrow rotate-arrow">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  </div>
+
+<div class="sidebar-nav-item">
+  <a href="/templating-components-with-renderfragements">Templating components with RenderFragments</a>
+</div>
+
+      </div>
+    </div>
+      <div class="hidden menu-group overflow-hidden pl-2 mb-4" data-group-id=b4f19001-e3b4-4ba4-8708-ebdb83fdcf7e>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=e0a9126c-3db1-4e31-9946-a1750329764b data-doc-title="Creating a TabControl">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/templating-components-with-renderfragements/creating-a-tabcontrol">Creating a TabControl</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=77817ab2-34d9-4375-9f96-e9d7b7a33502 data-doc-title="Passing data to a RenderFragment">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/templating-components-with-renderfragements/passing-data-to-a-renderfragement">Passing data to a RenderFragment</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=33edbb18-1f99-4ba9-8ccc-e3051758679f data-doc-title="Passing placeholders to RenderFragments">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/templating-components-with-renderfragements/passing-placeholders-to-renderfragments">Passing placeholders to RenderFragments</a>
+</div>
+
+      </div>
+    </div>
+<!-- _tree.cshtml -->
+    <div class="menu dark:text-gray-300 ml-6 font-light flex items-start cursor-pointer" data-doc-id=111aa7f6-feab-457f-8f36-028970f3b0f0 data-doc-title="Using @typeparam to create generic components">
+      <div class="flex items-start cursor-pointer">
+        <!-- _tree-node.cshtml -->
+
+
+
+<div class="sidebar-nav-item">
+  <a href="/templating-components-with-renderfragements/using-typeparam-to-create-generic-components">Using @typeparam to create generic components</a>
+</div>
+
+      </div>
+    </div>
+      </div>
+      </div>
+
+  </nav>
+</section>
+
+        <main
+          class="w-3/4 p-2 mx-auto prose max-w-none lg:p-10 bg-zinc-200 dark:bg-slate-800 dark:prose-invert "
+        >
+          <!-- _edit-in-github-link.cshtml -->
+
+<a class="flex flex-row justify-end gap-2 -mt-4 text-sm font-normal" href="https://github.com/TimeWarp-Enterprises/blazor-university/edit/main/input/pages/component-libraries/index.md" target="_blank">
+  <span>
+    Edit This Page
+  </span>
+  <svg 
+  xmlns="http://www.w3.org/2000/svg" 
+  fill="none" 
+  viewBox="0 0 24 24" 
+  stroke-width="1.5" 
+  stroke="currentColor"
+  class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round"
+    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+</svg>
+
+</a>
+
+          <p>Component libraries enable us to package components and pages into a single re-usable project, along with any supporting files such as CSS files, JavaScript, and images.</p>
+<p>Create a new Blazor solution named ClassLibraryConsumer. Right-click the solution and select <strong>Add</strong>-&gt;<strong>New Project</strong>, and then select <strong>Razor Class Library</strong> - name it <strong>BlazorUniversity.ClassLibrary</strong>.</p>
+<p>This will create a new Razor class library inside a new folder named BlazorUniversity.ClassLibrary, and create a new <code>csproj</code> file with the same name. Add the new library to the current solution, and then reference the new library from the ClassLibraryConsumer project.</p>
+<p>Our new class library can now be used from any number of projects by including it in the solution and referencing it, or it can be pushed to NuGet.org and consumed as a NuGet package.</p>
+<h2 id="adding-supporting-files">Adding supporting files</h2>
+<p>The default project created for us has a folder named <code>wwwroot</code>. This is where we are expected to place any supporting files the consumer of our library requires, such as JavaScript etc.</p>
+<h2 id="accessing-resources-in-a-consumed-component-library">Accessing resources in a consumed component library</h2>
+<p>Resources within the wwwroot folder of a consumed component library will be published with your project automatically. To access resources from a consumed library we need to use the following URL format.</p>
+<p><code>/_content/PackageId/MyImage.png</code></p>
+<ul>
+<li><code>_content</code> is the part of the path where all consumed component libraries' resources end up.</li>
+<li><code>PackageId</code> is the Package Id of the binary that contains the resources. This is the name you see entered in the <strong>Package id</strong> input when you right-click your class library, select <strong>Properties</strong>, and select the <strong>Package</strong> tab. If you installed the library via NuGet, it is the name of the package you installed.</li>
+<li><code>MyImage.png</code> is the name of any resource within the component library's <code>wwwroot</code> folder. The resource can be directly within that folder, or the path can identify a resource within any level of sub-folders, such as <code>/_content/BlazorUniversity.ConsumedLibrary/scripts/HelloWorld.js</code></li>
+</ul>
+<p>Note that any components within our component library should also reference resources using the same format.</p>
+<h2 id="consuming-a-component-library">Consuming a component library</h2>
+<p>Consuming a component library is as simple as either</p>
+<ul>
+<li>Adding a project reference to the library<br />
+or,</li>
+<li>Adding a NuGet reference to the library.</li>
+</ul>
+<p>Make sure to read any notes from the library's author as you might need to add CSS and/or JavaScript references to your HTML.</p>
+<h3 id="referencing-consumed-scripts-in-client-side-blazor">Referencing consumed scripts in Client-side Blazor</h3>
+<p>In a client-side Blazor application this typically involves adding a <code>&lt;script&gt;</code> reference to our project's <strong>wwwroot/index.html</strong> file.</p>
+<h3 id="referencing-consumed-scripts-in-server-side-blazor"><strong>Referencing consumed scripts i</strong>n Server-side Blazor</h3>
+<p>For a server-side Blazor app it is added into the file <strong>/Pages/_Host.cshtml</strong> and is usually added before the existing <code>&lt;script&gt;</code> tag referencing either <code>_framework/blazor.server.js</code> or <code>_framework/blazor.webassembly.js</code></p>
+
+        </main>
+      </div>
+      <!-- Main Footer -->
+    </div>
+    <!-- _scripts.cshtml -->
+<script src="/js/prism.js"></script>
+<script src="/js/tree.js"></script>
+
+  </div>
+</body>
+</html>
