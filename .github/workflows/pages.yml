@@ -30,6 +30,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: generate statiq site
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.401'
+      - run: dotnet run --project ./source/blazor-university-com/blazor-university-com.csproj
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload artifact
