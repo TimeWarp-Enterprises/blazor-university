@@ -19,7 +19,7 @@ public abstract class BaseStatiqRazorPage<TModel> : StatiqRazorPage<TModel>
   #endregion
 
   #region Context
-  public string? FavIconLink => Context.GetLink("favicon.ico");
+  public string? FavIconLink => Context.GetLink("favicon.png");
   public string? SiteTitle => Context.GetString(MetaDataKeys.SiteTitle);
   #endregion
 
@@ -29,16 +29,8 @@ public abstract class BaseStatiqRazorPage<TModel> : StatiqRazorPage<TModel>
   public FilteredDocumentList<IDocument> AtomFeeds => Outputs["**/*.atom"];
   public FilteredDocumentList<IDocument> RssFeeds => Outputs["**/*.rss"];
 
-  // public IOrderedEnumerable<IDocument> NavBarPages =>
-  //   OutputPages.GetChildrenOf("index.html")
-  //   .Where(x => x.GetBool(MetaDataKeys.ShowInNavbar, true))
-  //   .OrderBy(x => x.GetInt(Keys.Order));
-
   #endregion
-  protected BaseStatiqRazorPage()
-  {
-
-  }
+  protected BaseStatiqRazorPage() { }
 
   public string PageTitle => $"{SiteTitle} - {Title}".Trim(new[] { ' ', '-' });
 

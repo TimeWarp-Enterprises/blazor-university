@@ -8,7 +8,7 @@ date: "2019-11-15"
 > 
 > Steve Sanderson - Blazor developer, Microsoft  
 
-![](images/BlazorLogoLarge.png)
+![](images/blazor-university-logo-large.png)
 
 Welcome to Blazor University. By working your way through the information in this website I intend to take you from complete novice through to expert in all things Blazor.
 
