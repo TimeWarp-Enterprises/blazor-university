@@ -36,8 +36,10 @@ jobs:
           node-version: 18.9.0
       - name: Install dependencies
         run: npm install
+        working-directory: './source/blazor-university-tailwind'
       - name: run Tailwind to generate Site.css
         run: npm run tailwinds
+        working-directory: './source/blazor-university-tailwind'
       - name: generate statiq site
         uses: actions/setup-dotnet@v1
         with:
