@@ -21,16 +21,27 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: windows-latest
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-      with:
-        submodules: recursive
-    - uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '6.0.104' # SDK Version to use.
-    - run: dotnet run -- deploy -l Debug
-      working-directory: source/blazor-university-com
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: generate statiq site
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.401'
+      - run: dotnet run --project ./source/blazor-university-com/blazor-university-com.csproj
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          # Upload entire repository
+          path: './source/blazor-university-com/output'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
